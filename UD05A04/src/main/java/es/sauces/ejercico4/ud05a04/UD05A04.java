@@ -5,6 +5,7 @@ package es.sauces.ejercico4.ud05a04;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -19,7 +20,7 @@ public class UD05A04 {
     public static void main(String[] args) {
         Scanner teclado = new Scanner(System.in);
         int opcion;
-        List<Integer> lista;
+        ArrayList<Integer> lista;
         lista = new ArrayList<>();
         do {
             System.out.println("1.- Añadir un entero solicitado por teclado");
@@ -62,7 +63,7 @@ public class UD05A04 {
                         case 4 -> {
                             List<Integer> listaInvertida;
                             listaInvertida = new LinkedList<>();
-                            lista = lista.reversed();
+                            lista = (ArrayList<Integer>) lista.reversed();
                             System.out.println(listaInvertida.toString());
                         }
                         case 5 -> {
@@ -106,7 +107,7 @@ public class UD05A04 {
                             System.out.println("Dame un entero para buscar");
                             n=teclado.nextInt();
                             if(lista.contains(n)){
-                                System.out.println("Esta en la posicion: "+lista.indexOf(n));
+                                System.out.println("Esta en la posicion: "+lista.indexOf(n)+1);
                             }else{
                                 System.out.println("El numero no esta en la lista");
                             }
@@ -144,10 +145,8 @@ public class UD05A04 {
                             System.out.println(lista);
                         }
                         case 13 ->{
-                            List<Integer> listaOrdenada;
-                            listaOrdenada = new LinkedList<>(lista);
-                            listaOrdenada.sort(null);
-                            System.out.println(listaOrdenada.reversed());
+                            lista.sort(Comparator.reverseOrder());
+                            System.out.println(lista.toString());
                         }
                         case 14 ->{
                             System.out.println("El mayor es: "+Collections.max(lista)); 

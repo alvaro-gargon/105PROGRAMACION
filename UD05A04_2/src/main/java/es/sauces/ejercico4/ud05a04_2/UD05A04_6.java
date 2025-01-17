@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Scanner;
 import java.util.TreeMap;
 import java.util.TreeSet;
@@ -55,7 +56,9 @@ public class UD05A04_6 {
                             System.out.println("El ultimo codigo es: "+mapa.lastKey());
                         }
                         case 4 -> {
-                            System.out.println(mapa.firstEntry());
+                            Entry<String,String> entrada=mapa.firstEntry();
+                            System.out.println("La clave es: "+entrada.getKey());
+                             System.out.println("El valor es: "+entrada.getValue());
                         }
                         case 5 -> {
                             System.out.println(mapa.entrySet());

@@ -39,7 +39,11 @@ public class UD05A04_3 {
             teclado.nextLine();
             if (opcion == 1) {
                 num = LeerNumeros();
-                conjunto.add(num);
+                if(conjunto.add(num)){
+                    System.out.println("Elemento añadido al conjunto");
+                }else{
+                    System.out.println("No se ha podido añadir al conjunto (elemento repetido)");
+                }
             } else {
                 if (!conjunto.isEmpty()) {
                     switch (opcion) {
