@@ -4,20 +4,14 @@
 
 package es.sauces.ejercico4.ud05a04_2;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map.Entry;
 import java.util.Scanner;
 import java.util.TreeMap;
-import java.util.TreeSet;
 
 /**
- *
+ * @version some
  * @author alvaro.gargon.4
+ * @see java.util
  */
 public class UD05A04_6 {
 
@@ -47,7 +41,9 @@ public class UD05A04_6 {
             } else {
                 if (!mapa.isEmpty()) {
                     switch (opcion) {
-
+                        /**
+                         * @return un string con el contenido del mapa
+                         */
                         case 2 -> {
                             System.out.println(mapa.toString());
                         }
@@ -56,9 +52,12 @@ public class UD05A04_6 {
                             System.out.println("El ultimo codigo es: "+mapa.lastKey());
                         }
                         case 4 -> {
+                            /**
+                             * @param se crean un nuevo objeto llamado mapa para mostrar la clave y el valor
+                             */
                             Entry<String,String> entrada=mapa.firstEntry();
                             System.out.println("La clave es: "+entrada.getKey());
-                             System.out.println("El valor es: "+entrada.getValue());
+                            System.out.println("El valor es: "+entrada.getValue());
                         }
                         case 5 -> {
                             System.out.println(mapa.entrySet());
