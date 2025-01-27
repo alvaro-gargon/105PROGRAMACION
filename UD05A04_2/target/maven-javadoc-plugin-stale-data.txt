@@ -1,0 +1,47 @@
+-J-Duser.language=
+-J-Duser.country=
+@options
+@packages
+-encoding
+'UTF-8'
+-protected
+-source
+'21'
+-sourcepath
+'C:/Users/alvaro.gargon.4/OneDrive - Educacyl/Documentos/NetBeansProjects/UD05A04_2/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2025. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'C:/Users/alvaro.gargon.4/OneDrive - Educacyl/Documentos/NetBeansProjects/UD05A04_2/target/reports/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'UD05A04_2 1.0-SNAPSHOT API'
+-use
+-version
+-windowtitle
+'UD05A04_2 1.0-SNAPSHOT API'
+es.sauces.ejercico4.ud05a04_2
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\UD05A04_2\src\main\java = 1736856733240
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\UD05A04_2\target\reports\apidocs\allclasses-index.html = 1737635271147
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\UD05A04_2\target\reports\apidocs\allpackages-index.html = 1737635271150
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\UD05A04_2\target\reports\apidocs\copy.svg = 1737635271175
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\UD05A04_2\target\reports\apidocs\element-list = 1737635271094
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\UD05A04_2\target\reports\apidocs\help-doc.html = 1737635271170
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\UD05A04_2\target\reports\apidocs\index-all.html = 1737635271162
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\UD05A04_2\target\reports\apidocs\index.html = 1737635271166
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\UD05A04_2\target\reports\apidocs\link.svg = 1737635271176
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\UD05A04_2\target\reports\apidocs\member-search-index.js = 1737635271154
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\UD05A04_2\target\reports\apidocs\module-search-index.js = 1737635271151
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\UD05A04_2\target\reports\apidocs\overview-tree.html = 1737635271133
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\UD05A04_2\target\reports\apidocs\package-search-index.js = 1737635271152
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\UD05A04_2\target\reports\apidocs\script.js = 1737635271174
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\UD05A04_2\target\reports\apidocs\search-page.js = 1737635271179
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\UD05A04_2\target\reports\apidocs\search.html = 1737635271164
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\UD05A04_2\target\reports\apidocs\search.js = 1737635271177
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\UD05A04_2\target\reports\apidocs\stylesheet.css = 1737635271172
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\UD05A04_2\target\reports\apidocs\tag-search-index.js = 1737635271154
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\UD05A04_2\target\reports\apidocs\type-search-index.js = 1737635271153

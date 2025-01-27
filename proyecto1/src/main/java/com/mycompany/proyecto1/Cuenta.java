@@ -4,6 +4,9 @@
  */
 package com.mycompany.proyecto1;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -15,7 +18,18 @@ public class Cuenta {
     private String codigo;
     private String titular;
     private float saldo;
+    private List<Movimiento> movimientos;
 
+    public Cuenta() {
+        movimientos=new ArrayList<>();
+    }
+
+    public Cuenta(String codigo) {
+        this.codigo = codigo;
+        movimientos=new ArrayList<>();
+    }
+
+    
     /**
      * Permite instaciar un objeto incializando los valores codigo, titular y salida
      * @param codigo    el codigo de la cuenta
@@ -28,6 +42,7 @@ public class Cuenta {
         if(saldo>0){
             this.saldo = saldo;
         }
+        movimientos=new ArrayList<>();
     }
 
     /**
@@ -52,6 +67,15 @@ public class Cuenta {
      */
     public float getSaldo() {
         return saldo;
+    }
+
+    public List<Movimiento> getMovimientos() {
+        return movimientos;
+    }
+    
+    public List<Movimiento> getMovimientos(LocalDate desde, LocalDate hasta){
+        List<Movimiento> listado =new ArrayList<>();
+        return listado;
     }
 
     /**
@@ -86,8 +110,9 @@ public class Cuenta {
      * @param cantidad
      */
     public void ingresar(float cantidad){
-        if(saldo>0){
+        if(cantidad>0){
             saldo+=cantidad;
+            movimientos.add(new Movimiento(LocalDate.now(),'I',cantidad,saldo));
         }
     }
 
@@ -95,10 +120,29 @@ public class Cuenta {
      *
      * @param cantidad
      */
-    public void integrar(float cantidad){
+    public void reintegrar(float cantidad){
         if(cantidad>0 && cantidad<=saldo){
             saldo-=cantidad;
+            movimientos.add(new Movimiento(LocalDate.now(),'R',-cantidad,saldo));
         }
+    }
+    
+    public void realizarTransferencia(Cuenta destino, float cantidad){
+        if(cantidad>0 && cantidad<=saldo){
+            saldo-=cantidad;
+            movimientos.add(new Movimiento(LocalDate.now(),'T',-cantidad,saldo));
+        }
+    }
+    
+    public void recibirTranseferencia(Cuenta origen, float cantidad){
+        if(cantidad>0){
+            saldo+=cantidad;
+            movimientos.add(new Movimiento(LocalDate.now(),'I',cantidad,saldo));
+        }
+    }
+    
+    public String listarMovimientos(){
+        return movimientos.toString();
     }
 
     /**
