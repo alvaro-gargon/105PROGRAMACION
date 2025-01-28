@@ -4,8 +4,10 @@
  */
 package com.mycompany.proyecto1;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  *
@@ -13,11 +15,11 @@ import java.util.List;
  */
 public class Banco {
     private String nombre;
-    private List<Cuenta> cuentas;
+    private Set<Cuenta> cuentas;
 
     public Banco(String nombre) {
         this.nombre = nombre;
-        cuentas=new LinkedList<>();
+        cuentas=new TreeSet<>();
     }
 
     public String getNombre() {
@@ -29,7 +31,7 @@ public class Banco {
     }
 
     public List<Cuenta> getCuentas() {
-        return cuentas;
+        return new ArrayList<>(cuentas);
     }
     
     
@@ -38,9 +40,10 @@ public class Banco {
     }
     
     public Cuenta buscarCuenta(String codigo){
-        int posicion=cuentas.indexOf(new Cuenta(codigo));
-        if(posicion!=-1){
-            return cuentas.get(posicion);
+        for(Cuenta c:cuentas){
+            if(c.getCodigo().equals(codigo)){
+                return c;
+            }
         }
         return null;
     }
