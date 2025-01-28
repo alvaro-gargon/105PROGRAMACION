@@ -34,14 +34,18 @@ public class Banco {
     
     
     public boolean abrirCuenta(Cuenta cuenta){
-        return true;
+        return cuentas.add(cuenta);
     }
     
     public Cuenta buscarCuenta(String codigo){
+        int posicion=cuentas.indexOf(new Cuenta(codigo));
+        if(posicion!=-1){
+            return cuentas.get(posicion);
+        }
         return null;
     }
     public boolean cancelarCuenta(String codigo){
-        return true;
+        return cuentas.remove(new Cuenta(codigo));
     }
     public float getTotalDepositos(){
         float acumulador=0;

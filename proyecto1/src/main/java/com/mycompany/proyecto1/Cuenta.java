@@ -14,7 +14,7 @@ import java.util.Objects;
  * @author alvaro.gargon.4
  * @since 1.0
  */
-public class Cuenta {
+public class Cuenta implements Comparable<Cuenta>{
     private String codigo;
     private String titular;
     private float saldo;
@@ -75,6 +75,11 @@ public class Cuenta {
     
     public List<Movimiento> getMovimientos(LocalDate desde, LocalDate hasta){
         List<Movimiento> listado =new ArrayList<>();
+        for(Movimiento m:movimientos){
+            if(m.getFecha().isAfter(desde) && m.getFecha().isBefore(hasta)){
+                listado.add(m);
+            }
+        }
         return listado;
     }
 
@@ -128,9 +133,12 @@ public class Cuenta {
     }
     
     public void realizarTransferencia(Cuenta destino, float cantidad){
-        if(cantidad>0 && cantidad<=saldo){
-            saldo-=cantidad;
-            movimientos.add(new Movimiento(LocalDate.now(),'T',-cantidad,saldo));
+        if(destino!=null && destino!=this){
+            if(cantidad>0 && cantidad<=saldo){
+                saldo-=cantidad;
+                movimientos.add(new Movimiento(LocalDate.now(),'T',-cantidad,saldo));
+                destino.recibirTranseferencia(this, cantidad);
+            }
         }
     }
     
@@ -184,6 +192,10 @@ public class Cuenta {
         final Cuenta other = (Cuenta) obj;
         return Objects.equals(this.codigo, other.codigo);
     }
-    
 
+    @Override
+    public int compareTo(Cuenta o) {
+        return this.codigo.compareTo(o.codigo);
+    }
+    
 }

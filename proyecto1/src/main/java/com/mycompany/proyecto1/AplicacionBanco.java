@@ -14,12 +14,12 @@ public class AplicacionBanco {
 
     public static void main(String[] args) {
         Banco banco;
-        Cuenta cuenta=null;
+        Cuenta cuenta=null,cuentaDestino=null;
         String codigo, titular;
         float saldo=0,cantidad;
         int opcion,opcion2;
         Scanner teclado=new Scanner(System.in);
-        
+        banco=new Banco("Sauces");
         
         do{
             System.out.println("1- Abrir cuenta");
@@ -51,8 +51,9 @@ public class AplicacionBanco {
                     }
                     }
                             case 2->{
-                                System.out.println("Introduzca codugo de la cuenta");
+                                System.out.println("Introduzca codigo de la cuenta");
                                 codigo=teclado.nextLine();
+                                cuenta=banco.buscarCuenta(codigo);
                                 if(cuenta!=null){
                                     do{
                                         System.out.println("1- Ingresar dinero");
@@ -89,14 +90,23 @@ public class AplicacionBanco {
                                                 System.out.println(cuenta.getSaldo());
                                             }
                                             case 4->{
+                                                System.out.println("Introduzca el codigo de cuenta de destino: ");
+                                                codigo=teclado.nextLine();
+                                                cuentaDestino=banco.buscarCuenta(codigo);
+                                                if(cuentaDestino!=null){
                                                 System.out.println("Transferencia a realizar");
                                                 cantidad=teclado.nextFloat();
-                                                cuenta.realizarTransferencia(null, cantidad);
+                                                cuenta.realizarTransferencia(cuentaDestino, cantidad);
                                                 System.out.println("Cantidad transferida");
                                                 System.out.println("Nuevo saldo: "+cuenta.getSaldo());
-                                            }
+                                                }else{
+                                                    System.out.println("No existe la cuenta de destino");
+                                                }
+                                            }    
                                             case 5->{
-                                                System.out.println(cuenta.listarMovimientos());
+                                                for(Movimiento m:cuenta.getMovimientos()){
+                                                    System.out.println(m);
+                                                }
                                             }
                                             case 0->{
                                                 System.out.println("Adios");
