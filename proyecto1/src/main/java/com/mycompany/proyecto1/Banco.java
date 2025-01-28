@@ -6,8 +6,8 @@ package com.mycompany.proyecto1;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  *
@@ -15,11 +15,11 @@ import java.util.TreeSet;
  */
 public class Banco {
     private String nombre;
-    private Set<Cuenta> cuentas;
+    private Map<String,Cuenta> cuentas;
 
     public Banco(String nombre) {
         this.nombre = nombre;
-        cuentas=new TreeSet<>();
+        cuentas=new TreeMap<>();
     }
 
     public String getNombre() {
@@ -31,29 +31,25 @@ public class Banco {
     }
 
     public List<Cuenta> getCuentas() {
-        return new ArrayList<>(cuentas);
+        return new ArrayList<>(cuentas.values());
     }
     
     
     public boolean abrirCuenta(Cuenta cuenta){
-        return cuentas.add(cuenta);
+        return cuentas.putIfAbsent(cuenta.getCodigo(), cuenta)==null;
     }
     
     public Cuenta buscarCuenta(String codigo){
-        for(Cuenta c:cuentas){
-            if(c.getCodigo().equals(codigo)){
-                return c;
-            }
-        }
-        return null;
+        return cuentas.get(codigo);
     }
+    
     public boolean cancelarCuenta(String codigo){
-        return cuentas.remove(new Cuenta(codigo));
+        return cuentas.remove(codigo)!=null;
     }
     public float getTotalDepositos(){
         float acumulador=0;
         
-        for(Cuenta c:cuentas){
+        for(Cuenta c:cuentas.values()){
             acumulador+=c.getSaldo();
         }
         return acumulador;
