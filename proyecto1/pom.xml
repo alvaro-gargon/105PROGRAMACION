@@ -12,4 +12,30 @@
         <exec.mainClass>com.mycompany.proyecto1.AplicacionBanco</exec.mainClass>
     </properties>
     <name>Banco</name>
+    <build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                    <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    <configuration>
+                        <archive>
+                            <manifest>
+                                <mainClass> es.sauces.banco.AplicacionBanco </mainClass>
+                            </manifest>
+                        </archive>
+                        <descriptorRefs>
+                            <descriptorRef>jar-with-dependencies</descriptorRef>
+                        </descriptorRefs>
+                        </configuration>
+                    </execution>
+                </executions>
+        </plugin>
+    </plugins>
+    </build>
 </project>
