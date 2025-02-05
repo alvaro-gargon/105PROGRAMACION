@@ -19,7 +19,7 @@ public class EmpleadoEventual extends Empleado {
         super(dni);
     }
 
-    public EmpleadoEventual(float salarioHora, int horas, String dni, String nombre) {
+    public EmpleadoEventual(String dni, String nombre,float salarioHora, int horas) {
         super(dni, nombre);
         this.salarioHora = salarioHora;
         this.horas = horas;
@@ -43,7 +43,7 @@ public class EmpleadoEventual extends Empleado {
 
     @Override
     public String toString() {
-        return "EmpleadoEventual{" + "salarioHora=" + salarioHora + ", horas=" + horas + '}';
+        return super.toString()+","+salarioHora+","+horas;
     }
     @Override
     public float ingresos(){
