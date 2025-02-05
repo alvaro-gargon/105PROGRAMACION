@@ -1,0 +1,47 @@
+-J-Duser.language=
+-J-Duser.country=
+@options
+@packages
+-encoding
+'UTF-8'
+-protected
+-source
+'21'
+-sourcepath
+'C:/Users/alvaro.gargon.4/OneDrive - Educacyl/Documentos/NetBeansProjects/Simulacro/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2025. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'C:/Users/alvaro.gargon.4/OneDrive - Educacyl/Documentos/NetBeansProjects/Simulacro/target/reports/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'Simulacro 1.0-SNAPSHOT API'
+-use
+-version
+-windowtitle
+'Simulacro 1.0-SNAPSHOT API'
+es.sauces.ejercico4.simulacro
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\Simulacro\src\main\java = 1733135363992
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\Simulacro\target\reports\apidocs\allclasses-index.html = 1737633537412
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\Simulacro\target\reports\apidocs\allpackages-index.html = 1737633537414
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\Simulacro\target\reports\apidocs\copy.svg = 1737633537458
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\Simulacro\target\reports\apidocs\element-list = 1737633537363
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\Simulacro\target\reports\apidocs\help-doc.html = 1737633537444
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\Simulacro\target\reports\apidocs\index-all.html = 1737633537427
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\Simulacro\target\reports\apidocs\index.html = 1737633537427
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\Simulacro\target\reports\apidocs\link.svg = 1737633537460
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\Simulacro\target\reports\apidocs\member-search-index.js = 1737633537418
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\Simulacro\target\reports\apidocs\module-search-index.js = 1737633537415
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\Simulacro\target\reports\apidocs\overview-tree.html = 1737633537401
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\Simulacro\target\reports\apidocs\package-search-index.js = 1737633537416
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\Simulacro\target\reports\apidocs\script.js = 1737633537449
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\Simulacro\target\reports\apidocs\search-page.js = 1737633537467
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\Simulacro\target\reports\apidocs\search.html = 1737633537427
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\Simulacro\target\reports\apidocs\search.js = 1737633537462
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\Simulacro\target\reports\apidocs\stylesheet.css = 1737633537447
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\Simulacro\target\reports\apidocs\tag-search-index.js = 1737633537419
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\Simulacro\target\reports\apidocs\type-search-index.js = 1737633537417

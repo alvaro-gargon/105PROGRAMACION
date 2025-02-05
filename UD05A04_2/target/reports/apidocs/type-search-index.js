@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"es.sauces.ejercico4.ud05a04_2","l":"UD05A04_2"},{"p":"es.sauces.ejercico4.ud05a04_2","l":"UD05A04_3"},{"p":"es.sauces.ejercico4.ud05a04_2","l":"UD05A04_4"},{"p":"es.sauces.ejercico4.ud05a04_2","l":"UD05A04_5"},{"p":"es.sauces.ejercico4.ud05a04_2","l":"UD05A04_6"}];updateSearchResults();

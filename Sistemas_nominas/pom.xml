@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.mycompany</groupId>
-    <artifactId>proyecto1</artifactId>
+    <groupId>es.sauces.ejercico4</groupId>
+    <artifactId>Sistemas_nominas</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
-        <exec.mainClass>com.mycompany.proyecto1.AplicacionBanco</exec.mainClass>
+        <exec.mainClass>es.sauces.ejercico4.sistemas_nominas.App_nominas</exec.mainClass>
     </properties>
-    <name>Banco</name>
+    <name>Sistemas_Nominas</name>
     <build>
     <plugins>
         <plugin>
@@ -26,7 +26,7 @@
                     <configuration>
                         <archive>
                             <manifest>
-                                <mainClass> es.sauces.banco.AplicacionBanco </mainClass>
+                                <mainClass> es.sauces.Sistemas_nominas.App_nominas </mainClass>
                             </manifest>
                         </archive>
                         <descriptorRefs>
