@@ -32,7 +32,6 @@ public class App_nominas {
             teclado.nextLine();
             switch(opcion){
                 case 1->{
-
                             System.out.println("Quiere crear un empleado fijo(1) o un "
                                     + "empleado eventual(2)");
                             opcion2=teclado.nextInt();
@@ -108,8 +107,7 @@ public class App_nominas {
                 case 5->{
                     for(Empleado e:sistemaNominas.listarEmpleadosPorSueldo()){
                         System.out.println(e);
-                    }
-                    
+                    }     
                 }
                 case 6->{
                     System.out.println(sistemaNominas.getTotalSalarios());
@@ -119,7 +117,7 @@ public class App_nominas {
                             
                 default ->{System.out.println("Error en la entrada");}
                         
-                    }          
+            }          
         }while(opcion!=0);
     }
 }
