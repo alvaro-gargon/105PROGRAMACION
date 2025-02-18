@@ -4,6 +4,7 @@
 
 package com.mycompany.proyecto1;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -12,8 +13,9 @@ import java.util.Scanner;
  */
 public class AplicacionBanco {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SaldoInsuficienteException {
         Banco banco;
+        boolean error;
         Cuenta cuenta=null,cuentaDestino=null;
         String codigo, titular;
         float saldo=0,cantidad;
@@ -29,27 +31,43 @@ public class AplicacionBanco {
             System.out.println("5- Consultar total depositos");
             System.out.println("0- Salir");
             System.out.print("Introduzca tu opcion:");
-            opcion=teclado.nextInt();
+            try{
+                opcion=teclado.nextInt();
+            }catch(InputMismatchException ime){
+                opcion=1000;
+            }
             teclado.nextLine();
             switch(opcion){
-                
-                case 1->{
-                    if(cuenta==null){
-                        System.out.print("Introducir titular ");
-                        titular=teclado.nextLine();
-                        System.out.print("Introducir saldo ");
-                        saldo=teclado.nextFloat();
-                        teclado.nextLine();
-                        System.out.print("Introducir codigo ");
-                        codigo=teclado.nextLine();
-                        teclado.nextLine();
-                        cuenta=new Cuenta(codigo,titular,saldo);
-                        if(banco.abrirCuenta(cuenta))
-                        System.out.println("Cuenta creada con exito ");
-                    }else{
-                        System.out.println("No se puede abrir la cuenta "+ cuenta);
-                    }
-                    }
+                case 1 -> {
+                        do {
+                            error = false;
+                            try {
+                                System.out.print("Introducir codigo ");
+                                codigo = teclado.nextLine();
+                                while(!Cuenta.esIbanValido(codigo)){
+                                    System.out.println("Error al introducri el codigo, vuelve a intentarlo");
+                                    codigo = teclado.nextLine();
+                                }
+                                System.out.print("Introducir titular ");
+                                titular = teclado.nextLine();
+                                System.out.print("Introducir saldo ");
+                                saldo = teclado.nextFloat();
+                                cuenta = new Cuenta(codigo, titular, saldo);
+                                if (banco.abrirCuenta(cuenta)) {
+                                    System.out.println("Cuenta creada con exito ");
+                                } else {
+                                    System.out.println("No se puede abrir la cuenta " + cuenta);
+                                }
+                            } catch (IllegalArgumentException | IbanException ex) {
+                                System.out.println(ex.getMessage());
+                                error = true;
+                            } catch (InputMismatchException ime) {
+                                opcion = 1000;
+                            } finally {
+                                teclado.nextLine();
+                            }
+                        } while (error);
+                }
                             case 2->{
                                 System.out.println("Introduzca codigo de la cuenta");
                                 codigo=teclado.nextLine();
@@ -78,6 +96,7 @@ public class AplicacionBanco {
                                             System.out.print("Introduzca cantidad a retirar: ");
                                             cantidad=teclado.nextFloat();
                                             teclado.nextLine();
+                                            try{
                                             cuenta.reintegrar(cantidad);
                                             if( saldo!=0 && cantidad<saldo ){
                                                 System.out.println("Canitdad retirada");
@@ -85,23 +104,30 @@ public class AplicacionBanco {
                                             }else{
                                                 System.out.println("No puedes retirar mas dinero del que tienes");
                                             }
+                                            }catch(SaldoInsuficienteException | IllegalArgumentException ex){
+                                                System.out.println(ex.getMessage());
+                                            }
                                             }
                                             case 3->{
                                                 System.out.println(cuenta.getSaldo());
                                             }
                                             case 4->{
                                                 System.out.println("Introduzca el codigo de cuenta de destino: ");
+                                                try{
                                                 codigo=teclado.nextLine();
                                                 cuentaDestino=banco.buscarCuenta(codigo);
-                                                if(cuentaDestino!=null){
+                                                }catch(NullPointerException | IllegalArgumentException ex){
+                                                    System.out.println(ex.getMessage());
+                                                }
                                                 System.out.println("Transferencia a realizar");
+                                                try{
                                                 cantidad=teclado.nextFloat();
                                                 cuenta.realizarTransferencia(cuentaDestino, cantidad);
+                                                }catch(SaldoInsuficienteException | IllegalArgumentException ex){
+                                                    System.out.println(ex.getMessage());
+                                                }
                                                 System.out.println("Cantidad transferida");
                                                 System.out.println("Nuevo saldo: "+cuenta.getSaldo());
-                                                }else{
-                                                    System.out.println("No existe la cuenta de destino");
-                                                }
                                             }    
                                             case 5->{
                                                 for(Movimiento m:cuenta.getMovimientos()){
@@ -122,18 +148,18 @@ public class AplicacionBanco {
                             }
                             case 3->{
                                 System.out.println("Introduzca codigo de cuenta");
+                                try{
                                 codigo=teclado.nextLine();
                                 cuenta=banco.buscarCuenta(codigo);
-                                if(cuenta!=null){
-                                    System.out.println(cuenta);
+                                System.out.println(cuenta);
                                     if(banco.cancelarCuenta(codigo)){
                                         System.out.println("Cuenta cancelada");
                                     }else{
                                         System.out.println("No se ha podido cancelar la cuenta");
                                     }
-                                }else{
-                                    System.out.println("No existe una cuenta con ese codigo");
-                                }
+                                }catch(NullPointerException ex){
+                                    System.out.println(ex.getMessage());
+                                }        
                             }
                             case 4->{
                                 for(Cuenta c:banco.getCuentas()){

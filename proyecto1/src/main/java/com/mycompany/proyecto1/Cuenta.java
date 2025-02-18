@@ -8,6 +8,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * La clase {@code Cuenta} modela una cuenta bancaria.
@@ -30,8 +32,12 @@ public class Cuenta implements Comparable<Cuenta>{
     /**
      *Permite instaciar un objeto incializando los valores codigo.
      * @param codigo el codigo de la cuenta
+     * @throws com.mycompany.proyecto1.IbanException
      */
-    public Cuenta(String codigo) {
+    public Cuenta(String codigo) throws IbanException {
+        if(!esIbanValido(codigo)){
+            throw new IbanException("Codigo incorrecto");
+        }
         this.codigo = codigo;
         movimientos=new ArrayList<>();
     }
@@ -42,8 +48,15 @@ public class Cuenta implements Comparable<Cuenta>{
      * @param codigo    el codigo de la cuenta
      * @param titular   el DNI del titular de la cuenta
      * @param saldo     el saldo de la cuenta
+     * @throws com.mycompany.proyecto1.IbanException
      */
-    public Cuenta(String codigo, String titular, float saldo) {
+    public Cuenta(String codigo, String titular, float saldo) throws IbanException {
+         if(!esIbanValido(codigo)){
+            throw new IbanException("Codigo incorrecto");
+        }
+        if(saldo<0){
+            throw new IllegalArgumentException("No inicial no puede seer menor de 0");
+        }
         this.codigo = codigo;
         this.titular = titular;
         if(saldo>0){
@@ -103,8 +116,12 @@ public class Cuenta implements Comparable<Cuenta>{
     /**
      *
      * @param codigo cambia el codigo 
+     * @throws com.mycompany.proyecto1.IbanException 
      */
-    public void setCodigo(String codigo) {
+    public void setCodigo(String codigo) throws IbanException {
+         if(!esIbanValido(codigo)){
+            throw new IbanException("Codigo incorrecto");
+        }
         this.codigo = codigo;
     }
 
@@ -119,8 +136,12 @@ public class Cuenta implements Comparable<Cuenta>{
     /**
      *
      * @param saldo cambia el saldo
+     * @throws com.mycompany.proyecto1.SaldoInsuficienteException
      */
-    public void setSaldo(float saldo) {
+    public void setSaldo(float saldo) throws SaldoInsuficienteException{
+        if(saldo<0){
+            throw new SaldoInsuficienteException("Saldo no puede ser menor de 0");
+        }
         if (saldo>=0){
             this.saldo=saldo;
         }
@@ -132,6 +153,9 @@ public class Cuenta implements Comparable<Cuenta>{
      * @param cantidad es la cantidad que se va a ingresar
      */
     public void ingresar(float cantidad){
+        if(cantidad<0){
+            throw new IllegalArgumentException("La cantidad debe de ser mayor de 0");
+        }
         if(cantidad>0){
             saldo+=cantidad;
             movimientos.add(new Movimiento(LocalDate.now(),'I',cantidad,saldo));
@@ -141,8 +165,15 @@ public class Cuenta implements Comparable<Cuenta>{
     /**
      * Reintegra la cantidad especificada y genera un movimiento
      * @param cantidad es la cantidad que se va a reintegrar
+     * @throws com.mycompany.proyecto1.SaldoInsuficienteException
      */
-    public void reintegrar(float cantidad){
+    public void reintegrar(float cantidad)throws SaldoInsuficienteException{
+        if(cantidad>saldo){
+            throw new SaldoInsuficienteException("Saldo insuficiente");
+        }
+        if(cantidad<0){
+            throw new IllegalArgumentException("La cantidad debe de ser mayor de 0");
+        }
         if(cantidad>0 && cantidad<=saldo){
             saldo-=cantidad;
             movimientos.add(new Movimiento(LocalDate.now(),'R',-cantidad,saldo));
@@ -153,15 +184,24 @@ public class Cuenta implements Comparable<Cuenta>{
      * Realiza una transferencia desde una cuenta destino y genera un movimiento
      * @param destino es la cuenta que va a recibir la transferencia
      * @param cantidad es la cantidad a transferir
+     * @throws com.mycompany.proyecto1.SaldoInsuficienteException
      */
-    public void realizarTransferencia(Cuenta destino, float cantidad){
-        if(destino!=null && destino!=this){
-            if(cantidad>0 && cantidad<=saldo){
-                saldo-=cantidad;
-                movimientos.add(new Movimiento(LocalDate.now(),'T',-cantidad,saldo));
-                destino.recibirTranseferencia(this, cantidad);
-            }
+    public void realizarTransferencia(Cuenta destino, float cantidad)throws SaldoInsuficienteException{
+        if(cantidad>saldo){
+            throw new SaldoInsuficienteException("Saldo insuficiente");
         }
+        if(cantidad<0){
+            throw new IllegalArgumentException("La cantidad debe de ser mayor de 0");
+        }
+        if(destino==null){
+            throw new NullPointerException("El destino no puede ser nulo");
+        }
+        if(destino==this){
+            throw new IllegalArgumentException("No se puede realizar una transferencia a si mismo");
+        }
+        saldo-=cantidad;
+        movimientos.add(new Movimiento(LocalDate.now(),'T',-cantidad,saldo));
+        destino.recibirTranseferencia(this, cantidad); 
     }
     
     /**
@@ -170,6 +210,9 @@ public class Cuenta implements Comparable<Cuenta>{
      * @param cantidad es la cantidad que se va a recibir
      */
     public void recibirTranseferencia(Cuenta origen, float cantidad){
+        if(cantidad<0){
+            throw new IllegalArgumentException("La cantidad debe de ser mayor de 0");
+        }
         if(cantidad>0){
             saldo+=cantidad;
             movimientos.add(new Movimiento(LocalDate.now(),'I',cantidad,saldo));
@@ -234,4 +277,10 @@ public class Cuenta implements Comparable<Cuenta>{
         return this.codigo.compareTo(o.codigo);
     }
     
+    public static boolean esIbanValido(String codigoIban){
+        String patron="(ES)(\\d{2})(\\d{4})(\\d{4})(\\d{2})(\\d{10})";
+        Pattern p=Pattern.compile(patron);
+        Matcher m=p.matcher(codigoIban);
+        return m.matches();
+    }
 }

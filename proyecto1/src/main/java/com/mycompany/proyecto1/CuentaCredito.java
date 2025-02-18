@@ -18,7 +18,7 @@ public class CuentaCredito extends Cuenta {
 
 
 
-    public CuentaCredito(String codigo, String titular, float saldo,float limiteCredito) {
+    public CuentaCredito(String codigo, String titular, float saldo,float limiteCredito) throws IbanException {
         super(codigo, titular, saldo);
         this.limiteCredito=limiteCredito;
     }
@@ -32,8 +32,11 @@ public class CuentaCredito extends Cuenta {
     }
 
     @Override
-    public void reintegrar(float cantidad) {
+    public void reintegrar(float cantidad) throws SaldoInsuficienteException {
         float nuevoSaldo=getSaldo()-cantidad;
+        if(nuevoSaldo<-limiteCredito){
+            throw new SaldoInsuficienteException("Saldo insuficiente");
+        }
         if(nuevoSaldo>=-limiteCredito){
             setSaldo(nuevoSaldo);
             getMovimientos().add(new Movimiento(LocalDate.now(),'R',-cantidad,getSaldo()));

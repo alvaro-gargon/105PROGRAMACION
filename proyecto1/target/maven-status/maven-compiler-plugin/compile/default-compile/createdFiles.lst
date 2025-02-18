@@ -1,4 +1,6 @@
 com\mycompany\proyecto1\Banco.class
 com\mycompany\proyecto1\AplicacionBanco.class
 com\mycompany\proyecto1\Movimiento.class
+com\mycompany\proyecto1\SaldoInsuficienteException.class
+com\mycompany\proyecto1\CuentaCredito.class
 com\mycompany\proyecto1\Cuenta.class
