@@ -14,21 +14,27 @@ public class EmpleadoFijo extends Empleado {
     public EmpleadoFijo() {
     }
 
-    public EmpleadoFijo(String dni) {
+    public EmpleadoFijo(Dni dni) {
         super(dni);
     }
 
-    public EmpleadoFijo(String dni, String nombre) {
+    public EmpleadoFijo(Dni dni, String nombre) {
         super(dni, nombre);
     }
 
-    public EmpleadoFijo(String dni, String nombre,float salario) {
+    public EmpleadoFijo(Dni dni, String nombre,float salario) {
         super(dni, nombre);
+        if(salario<0){
+            throw new IllegalArgumentException("El salario no puede ser menor de 0");
+        }
         this.salario = salario;
     }
     
 
     public void setSalario(float salario) {
+        if(salario<0){
+            throw new IllegalArgumentException("El salario no puede ser menor de 0");
+        }
         this.salario = salario;
     }
 

@@ -26,7 +26,7 @@ public class SistemaNominas {
     
     public Empleado getEmpleado(String dni){
         for(Empleado e:empleados){
-            if(e.getDni().equals(dni)){
+            if(e.getDni().toString().equals(dni)){
                 return e;
             }
         }

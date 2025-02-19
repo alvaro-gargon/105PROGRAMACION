@@ -15,12 +15,18 @@ public class EmpleadoEventual extends Empleado {
     public EmpleadoEventual() {
     }
 
-    public EmpleadoEventual(String dni) {
+    public EmpleadoEventual(Dni dni) {
         super(dni);
     }
 
-    public EmpleadoEventual(String dni, String nombre,float salarioHora, int horas) {
+    public EmpleadoEventual(Dni dni, String nombre,float salarioHora, int horas) {
         super(dni, nombre);
+        if(salarioHora<0){
+            throw new IllegalArgumentException("El salario no puede ser menor de 0");
+        }
+        if(horas<0){
+            throw new IllegalArgumentException("Las horas no pueden ser menor de 0");
+        }
         this.salarioHora = salarioHora;
         this.horas = horas;
     }
@@ -30,6 +36,9 @@ public class EmpleadoEventual extends Empleado {
     }
 
     public void setSalarioHora(float salarioHora) {
+        if(salarioHora<0){
+            throw new IllegalArgumentException("El salario no puede ser menor de 0");
+        }
         this.salarioHora = salarioHora;
     }
 
@@ -38,6 +47,9 @@ public class EmpleadoEventual extends Empleado {
     }
 
     public void setHoras(int horas) {
+        if(horas<0){
+            throw new IllegalArgumentException("Las horas no pueden ser menor de 0");
+        }
         this.horas = horas;
     }
 

@@ -4,7 +4,10 @@
 
 package es.sauces.ejercico4.sistemas_nominas;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -28,7 +31,11 @@ public class App_nominas {
             System.out.println("6-Consultar total salarios");
             System.out.println("0-Salir");
             System.out.print("Introduzca tu opcion:");
-            opcion=teclado.nextInt();
+            try{
+                opcion=teclado.nextInt();
+            }catch(InputMismatchException ime){
+                opcion=1000;
+            }
             teclado.nextLine();
             switch(opcion){
                 case 1->{
@@ -38,35 +45,49 @@ public class App_nominas {
                             teclado.nextLine();
                             switch(opcion2){
                                 case 1->{
-                                    System.out.println("Dame el dni");
-                                    dni=teclado.nextLine();
-                                    System.out.println("Dame el nombre");
-                                    nombre=teclado.nextLine();
-                                    System.out.println("Dame el salario");
-                                    salario=teclado.nextFloat();
-                                    empleado=new EmpleadoFijo(dni,nombre,salario);
-                                    if(sistemaNominas.incluirEmpleado(empleado)){
-                                        System.out.println("Empleado fijo creado con exito");
-                                    }else{
-                                        System.out.println("Error al crear un empleado fijo");
+                                        System.out.println("Dame el dni");
+                                        dni=teclado.nextLine();
+                                        System.out.println("Dame el nombre");
+                                        nombre=teclado.nextLine();
+                                    try {
+                                        System.out.println("Dame el salario");
+                                        salario=teclado.nextFloat();
+                                        empleado=new EmpleadoFijo(Dni.valueOf(dni),nombre,salario);
+                                        if(sistemaNominas.incluirEmpleado(empleado)){
+                                            System.out.println("Empleado fijo creado con exito");
+                                        }else{
+                                            System.out.println("Error al crear un empleado fijo");
+                                        }
+                                    } catch (DniException |IllegalArgumentException|InputMismatchException ex) {
+                                        System.out.println(ex.getMessage());
+                                    }finally {
+                                    teclado.nextLine();
                                     }
                                 }
+
                                 case 2->{
-                                    System.out.println("Dame el dni");
-                                    dni=teclado.nextLine();
-                                    System.out.println("Dame el nombre");
-                                    nombre=teclado.nextLine();
-                                    System.out.println("Dame el salario hora");
-                                    salarioHora=teclado.nextFloat();
-                                    System.out.println("Dame las horas");
-                                    horas=teclado.nextInt();
-                                    empleado=new EmpleadoEventual(dni,nombre,salarioHora,horas);
-                                     if(sistemaNominas.incluirEmpleado(empleado)){
-                                        System.out.println("Empleado eventual creado con exito");
-                                    }else{
-                                        System.out.println("Error al crear un empleado eventual");
+                                        System.out.println("Dame el dni");
+                                        dni=teclado.nextLine();
+                                        System.out.println("Dame el nombre");
+                                        nombre=teclado.nextLine();
+                                    try {
+                                        System.out.println("Dame el salario hora");
+                                        salarioHora=teclado.nextFloat();
+                                        System.out.println("Dame las horas");
+                                        horas=teclado.nextInt();
+                                        empleado=new EmpleadoEventual(Dni.valueOf(dni),nombre,salarioHora,horas);
+                                        if(sistemaNominas.incluirEmpleado(empleado)){
+                                            System.out.println("Empleado eventual creado con exito");
+                                        }else{
+                                            System.out.println("Error al crear un empleado eventual");
+                                        }
+                                    } catch (DniException|IllegalArgumentException|InputMismatchException ex) {
+                                        System.out.println(ex.getMessage());
+                                    }finally {
+                                        teclado.nextLine();
                                     }
                                 }
+
                                 default ->{
                                     System.out.println("No se ha podido cear el empleado");
                                 }
