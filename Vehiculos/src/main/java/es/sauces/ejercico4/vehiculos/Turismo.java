@@ -17,6 +17,9 @@ public class Turismo extends Vehiculo {
     }
 
     public void setPlazas(int plazas) {
+        if(plazas<0 || plazas>5){
+            throw new IllegalArgumentException("Numero de plazas no valido");
+        }
         this.plazas = plazas;
     }
 
@@ -29,6 +32,9 @@ public class Turismo extends Vehiculo {
 
     public Turismo( String matricula, Grupo grupo,int plazas) {
         super(matricula, grupo);
+        if(plazas<0 || plazas>5){
+            throw new IllegalArgumentException("Numero de plazas no valido");
+        }
         this.plazas = plazas;
     }
 

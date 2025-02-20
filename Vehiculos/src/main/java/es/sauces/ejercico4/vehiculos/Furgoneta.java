@@ -20,6 +20,9 @@ public class Furgoneta extends Vehiculo {
 
     public Furgoneta( String matricula, Grupo grupo,float capacidad) {
         super(matricula, grupo);
+         if(capacidad<0){
+            throw new IllegalArgumentException("La capacidad no puede ser negativa");
+        }
         this.capacidad = capacidad;
     }
 
@@ -28,6 +31,9 @@ public class Furgoneta extends Vehiculo {
     }
 
     public void setCapacidad(float capacidad) {
+        if(capacidad<0){
+            throw new IllegalArgumentException("La capacidad no puede ser negativa");
+        }
         this.capacidad = capacidad;
     }
 
