@@ -14,11 +14,11 @@ public class Furgoneta extends Vehiculo {
     public Furgoneta() {
     }
 
-    public Furgoneta(String matricula) {
+    public Furgoneta(String matricula) throws MatriculaException {
         super(matricula);
     }
 
-    public Furgoneta( String matricula, Grupo grupo,float capacidad) {
+    public Furgoneta( String matricula, Grupo grupo,float capacidad) throws MatriculaException {
         super(matricula, grupo);
          if(capacidad<0){
             throw new IllegalArgumentException("La capacidad no puede ser negativa");

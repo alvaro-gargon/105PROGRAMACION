@@ -26,11 +26,11 @@ public class Turismo extends Vehiculo {
     public Turismo() {
     }
 
-    public Turismo(String matricula) {
+    public Turismo(String matricula) throws MatriculaException {
         super(matricula);
     }
 
-    public Turismo( String matricula, Grupo grupo,int plazas) {
+    public Turismo( String matricula, Grupo grupo,int plazas) throws MatriculaException {
         super(matricula, grupo);
         if(plazas<0 || plazas>5){
             throw new IllegalArgumentException("Numero de plazas no valido");

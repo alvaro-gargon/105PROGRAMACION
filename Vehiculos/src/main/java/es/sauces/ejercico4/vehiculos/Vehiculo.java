@@ -4,6 +4,7 @@
  */
 package es.sauces.ejercico4.vehiculos;
 
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -19,16 +20,16 @@ public abstract class  Vehiculo implements Comparable<Vehiculo> {
     public Vehiculo() {
     }
 
-    public Vehiculo(String matricula) {
+    public Vehiculo(String matricula) throws MatriculaException {
         if(!esMatriculaValida(matricula)){
-            throw new IllegalArgumentException("Matricula no valida");
+            throw new MatriculaException("Matricula no valida");
         }
         this.matricula = matricula;
     }
     
-    public Vehiculo(String matricula, Grupo grupo) {
+    public Vehiculo(String matricula, Grupo grupo) throws MatriculaException {
          if(!esMatriculaValida(matricula)){
-            throw new IllegalArgumentException("Matricula no valida");
+            throw new MatriculaException("Matricula no valida");
         }
         this.matricula = matricula;
         this.grupo = grupo;
@@ -43,9 +44,9 @@ public abstract class  Vehiculo implements Comparable<Vehiculo> {
         return matricula;
     }
 
-    public void setMatricula(String matricula) {
+    public void setMatricula(String matricula) throws MatriculaException {
         if(!esMatriculaValida(matricula)){
-            throw new IllegalArgumentException("Matricula no valida");
+            throw new MatriculaException("Matricula no valida");
         }
         this.matricula = matricula;
     }
@@ -95,16 +96,10 @@ public abstract class  Vehiculo implements Comparable<Vehiculo> {
     public abstract float getPrecioAlquiler();
     
     private static boolean esMatriculaValida(String matricula){
-        String patron="([0-9]{4})([A-Z&&[^QÑ]])";
+        String patron="([0-9]{4})([B-Z&&[^EIOUQÑ]]{3})";
         Pattern p=Pattern.compile(patron);
         Matcher m=p.matcher(matricula);
         return m.matches();
     }
     
-    private static boolean esGrupoValido(String grupo){
-        String patron="([0-9]{4})([A-Z&&[^QÑ]])";
-        Pattern p=Pattern.compile(patron);
-        Matcher m=p.matcher(grupo);
-        return m.matches();
-    }
 }

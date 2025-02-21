@@ -4,7 +4,10 @@
  */
 package es.sauces.ejercico4.vehiculos;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -15,7 +18,7 @@ public class App_AgenciaAlquiler {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args){
         /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
@@ -34,7 +37,11 @@ public class App_AgenciaAlquiler {
             System.out.println("5-Consultar alquiler más barato");
             System.out.println("0-Salir");
             System.out.print("Introduzca tu opcion:");
+            try{
             opcion=teclado.nextInt();
+            }catch(InputMismatchException ime){
+                opcion=1000;
+            }
             teclado.nextLine();
             switch(opcion){
                 case 1->{
@@ -44,31 +51,44 @@ public class App_AgenciaAlquiler {
                             teclado.nextLine();
                             switch(opcion2){
                                 case 1->{
-                                    System.out.println("Dame la matricula");
-                                    matricula=teclado.nextLine();
-                                    System.out.println("Dame el grupo");
-                                    grupo=teclado.nextLine();
-                                    System.out.println("Dame las plazas");
-                                    plaza=teclado.nextInt();
-                                    vehiculo=new Turismo(matricula,Grupo.valueOf(grupo),plaza);
-                                    if(agenciaAlquiler.incluirVehiculo(vehiculo)){
-                                        System.out.println("Turismo creado con exito");
-                                    }else{
-                                        System.out.println("Error al crear un turismo");
+                                    try {
+                                        System.out.println("Dame la matricula");
+                                        matricula=teclado.nextLine();
+                                        System.out.println("Dame el grupo");
+                                        grupo=teclado.nextLine();
+                                        System.out.println("Dame las plazas");
+                                        plaza=teclado.nextInt();
+                                        vehiculo=new Turismo(matricula,Grupo.valueOf(grupo),plaza);
+                                        if(agenciaAlquiler.incluirVehiculo(vehiculo)){
+                                            System.out.println("Turismo creado con exito");
+                                        }else{
+                                            System.out.println("Error al crear un turismo");
+                                        }
+                                    } catch (MatriculaException | InputMismatchException | IllegalArgumentException ex) {
+                                        System.out.println(ex.getMessage());
+                                    }finally{
+                                        teclado.nextLine();
                                     }
                                 }
+
                                 case 2->{
-                                    System.out.println("Dame la matricula");
-                                    matricula=teclado.nextLine();
-                                    System.out.println("Dame el grupo");
-                                    grupo=teclado.nextLine();
-                                    System.out.println("Dame la capacidad");
-                                    capacidad=teclado.nextFloat();
-                                    vehiculo=new Furgoneta(matricula,Grupo.valueOf(grupo),capacidad);
-                                     if(agenciaAlquiler.incluirVehiculo(vehiculo)){
-                                        System.out.println("Furgoneta creada con exito");
-                                    }else{
-                                        System.out.println("Error al crear una furgoneta");
+                                    try {
+                                        System.out.println("Dame la matricula");
+                                        matricula=teclado.nextLine();
+                                        System.out.println("Dame el grupo");
+                                        grupo=teclado.nextLine();
+                                        System.out.println("Dame la capacidad");
+                                        capacidad=teclado.nextFloat();
+                                        vehiculo=new Furgoneta(matricula,Grupo.valueOf(grupo),capacidad);
+                                        if(agenciaAlquiler.incluirVehiculo(vehiculo)){
+                                            System.out.println("Furgoneta creada con exito");
+                                        }else{
+                                            System.out.println("Error al crear una furgoneta");
+                                        }
+                                    } catch (MatriculaException | InputMismatchException | IllegalArgumentException ex) {
+                                        System.out.println(ex.getMessage());
+                                    }finally{
+                                        teclado.nextLine();
                                     }
                                 }
                                 default ->{
