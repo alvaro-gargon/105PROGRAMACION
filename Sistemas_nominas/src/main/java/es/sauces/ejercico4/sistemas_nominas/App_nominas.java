@@ -4,9 +4,12 @@
 
 package es.sauces.ejercico4.sistemas_nominas;
 
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.logging.Level;
+import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 /**
@@ -14,14 +17,16 @@ import java.util.logging.Logger;
  * @author alvaro.gargon.4
  */
 public class App_nominas {
-
-    public static void main(String[] args) {
+    private static final Logger LOG =Logger.getLogger("es.sauces.ejercico4.sistemas_nominas");
+    public static void main(String[] args) throws IOException {
         SistemaNominas sistemaNominas=new SistemaNominas(); 
         Empleado empleado=null;
         String dni,nombre;
         float salario,salarioHora;
         int opcion,opcion2,horas,comprobacion;
         Scanner teclado=new Scanner(System.in);
+        LogManager.getLogManager().readConfiguration(ClassLoader.getSystemClassLoader().getResourceAsStream("logging.properties"));
+        
         do{
             System.out.println("1-Crear empleado");
             System.out.println("2-Consultar empleado");
@@ -33,6 +38,7 @@ public class App_nominas {
             System.out.print("Introduzca tu opcion:");
             try{
                 opcion=teclado.nextInt();
+                LOG.log(Level.INFO, "Opcion elegida:{0}", opcion);
             }catch(InputMismatchException ime){
                 opcion=1000;
             }
@@ -59,6 +65,7 @@ public class App_nominas {
                                             System.out.println("Error al crear un empleado fijo");
                                         }
                                     } catch (DniException |IllegalArgumentException|InputMismatchException ex) {
+                                        LOG.log(Level.WARNING, Arrays.toString(ex.getStackTrace()));
                                         System.out.println(ex.getMessage());
                                     }finally {
                                     teclado.nextLine();

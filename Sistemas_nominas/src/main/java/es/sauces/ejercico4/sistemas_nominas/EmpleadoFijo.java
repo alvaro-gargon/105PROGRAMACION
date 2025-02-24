@@ -4,12 +4,16 @@
  */
 package es.sauces.ejercico4.sistemas_nominas;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author alvaro.gargon.4
  */
 public class EmpleadoFijo extends Empleado {
     private float salario;
+    private static final Logger LOG = Logger.getLogger(EmpleadoFijo.class.getName());
 
     public EmpleadoFijo() {
     }
@@ -25,6 +29,7 @@ public class EmpleadoFijo extends Empleado {
     public EmpleadoFijo(Dni dni, String nombre,float salario) {
         super(dni, nombre);
         if(salario<0){
+            LOG.log(Level.WARNING, "La cantidad ha sido menor de 0");
             throw new IllegalArgumentException("El salario no puede ser menor de 0");
         }
         this.salario = salario;

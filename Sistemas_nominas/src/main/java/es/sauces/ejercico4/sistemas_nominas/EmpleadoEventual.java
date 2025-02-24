@@ -4,6 +4,9 @@
  */
 package es.sauces.ejercico4.sistemas_nominas;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author alvaro.gargon.4
@@ -11,6 +14,7 @@ package es.sauces.ejercico4.sistemas_nominas;
 public class EmpleadoEventual extends Empleado {
     private float salarioHora;
     private int horas;
+    private static final Logger LOG = Logger.getLogger(EmpleadoEventual.class.getName());
 
     public EmpleadoEventual() {
     }
@@ -22,9 +26,11 @@ public class EmpleadoEventual extends Empleado {
     public EmpleadoEventual(Dni dni, String nombre,float salarioHora, int horas) {
         super(dni, nombre);
         if(salarioHora<0){
+            LOG.log(Level.WARNING, "El salario ha sido menor de 0");
             throw new IllegalArgumentException("El salario no puede ser menor de 0");
         }
         if(horas<0){
+            LOG.log(Level.WARNING, "Las horas han sido menor de 0");
             throw new IllegalArgumentException("Las horas no pueden ser menor de 0");
         }
         this.salarioHora = salarioHora;
