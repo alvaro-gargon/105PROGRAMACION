@@ -6,6 +6,8 @@ package es.sauces.ejercico4.vehiculos;
 
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,12 +18,14 @@ import java.util.regex.Pattern;
 public abstract class  Vehiculo implements Comparable<Vehiculo> {
     private String matricula;
     private Grupo grupo;
+    private static final Logger LOG = Logger.getLogger(Vehiculo.class.getName());
 
     public Vehiculo() {
     }
 
     public Vehiculo(String matricula) throws MatriculaException {
         if(!esMatriculaValida(matricula)){
+            LOG.log(Level.WARNING, "La matricula no es valida{0}", matricula);
             throw new MatriculaException("Matricula no valida");
         }
         this.matricula = matricula;
@@ -29,6 +33,7 @@ public abstract class  Vehiculo implements Comparable<Vehiculo> {
     
     public Vehiculo(String matricula, Grupo grupo) throws MatriculaException {
          if(!esMatriculaValida(matricula)){
+             LOG.log(Level.WARNING, "La matricula no es valida{0}", matricula);
             throw new MatriculaException("Matricula no valida");
         }
         this.matricula = matricula;
@@ -46,6 +51,7 @@ public abstract class  Vehiculo implements Comparable<Vehiculo> {
 
     public void setMatricula(String matricula) throws MatriculaException {
         if(!esMatriculaValida(matricula)){
+            LOG.log(Level.WARNING, "La matricula no es valida{0}", matricula);
             throw new MatriculaException("Matricula no valida");
         }
         this.matricula = matricula;

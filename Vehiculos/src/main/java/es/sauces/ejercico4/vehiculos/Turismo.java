@@ -4,6 +4,9 @@
  */
 package es.sauces.ejercico4.vehiculos;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author alvaro.gargon.4
@@ -11,6 +14,7 @@ package es.sauces.ejercico4.vehiculos;
 public class Turismo extends Vehiculo {
     
     private int plazas;
+    private static final Logger LOG = Logger.getLogger(Turismo.class.getName());
 
     public int getPlazas() {
         return plazas;
@@ -18,6 +22,7 @@ public class Turismo extends Vehiculo {
 
     public void setPlazas(int plazas) {
         if(plazas<0 || plazas>5){
+            LOG.log(Level.WARNING, "Las plazas han sido mayores de 5 o menores de 0");
             throw new IllegalArgumentException("Numero de plazas no valido");
         }
         this.plazas = plazas;
@@ -33,6 +38,7 @@ public class Turismo extends Vehiculo {
     public Turismo( String matricula, Grupo grupo,int plazas) throws MatriculaException {
         super(matricula, grupo);
         if(plazas<0 || plazas>5){
+            LOG.log(Level.WARNING, "Las plazas han sido mayores de 5 o menores de 0");
             throw new IllegalArgumentException("Numero de plazas no valido");
         }
         this.plazas = plazas;

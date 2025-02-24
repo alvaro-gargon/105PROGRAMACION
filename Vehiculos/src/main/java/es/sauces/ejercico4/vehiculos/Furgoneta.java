@@ -4,12 +4,16 @@
  */
 package es.sauces.ejercico4.vehiculos;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author alvaro.gargon.4
  */
 public class Furgoneta extends Vehiculo {
     private float capacidad;
+    private static final Logger LOG = Logger.getLogger(Furgoneta.class.getName());
 
     public Furgoneta() {
     }
@@ -21,6 +25,7 @@ public class Furgoneta extends Vehiculo {
     public Furgoneta( String matricula, Grupo grupo,float capacidad) throws MatriculaException {
         super(matricula, grupo);
          if(capacidad<0){
+            LOG.log(Level.WARNING, "La capacidad introducida es menor de 0");
             throw new IllegalArgumentException("La capacidad no puede ser negativa");
         }
         this.capacidad = capacidad;

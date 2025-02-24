@@ -4,9 +4,12 @@
  */
 package es.sauces.ejercico4.vehiculos;
 
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.logging.Level;
+import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 /**
@@ -15,13 +18,17 @@ import java.util.logging.Logger;
  */
 public class App_AgenciaAlquiler {
 
+    private static final Logger LOG = Logger.getLogger("es.sauces.ejercico4.vehiculos");
+    
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException{
         /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
+        LogManager.getLogManager().readConfiguration(ClassLoader.getSystemClassLoader().getResourceAsStream("logging.properties"));
         AgenciaAlquiler agenciaAlquiler=new AgenciaAlquiler("Marcos Fernandez Industries"); 
         Vehiculo vehiculo=null;
         String dni,nombre;
@@ -39,6 +46,7 @@ public class App_AgenciaAlquiler {
             System.out.print("Introduzca tu opcion:");
             try{
             opcion=teclado.nextInt();
+            LOG.log(Level.WARNING, "{0}Opcion escogida:", opcion);
             }catch(InputMismatchException ime){
                 opcion=1000;
             }
@@ -66,6 +74,7 @@ public class App_AgenciaAlquiler {
                                         }
                                     } catch (MatriculaException | InputMismatchException | IllegalArgumentException ex) {
                                         System.out.println(ex.getMessage());
+                                        LOG.log(Level.WARNING, Arrays.toString(ex.getStackTrace()));
                                     }finally{
                                         teclado.nextLine();
                                     }
