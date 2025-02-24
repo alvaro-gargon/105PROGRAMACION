@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -17,6 +18,9 @@ import java.util.regex.Pattern;
  * @since 1.0
  */
 public class Cuenta implements Comparable<Cuenta>{
+    
+    private static final Logger Log=Logger.getLogger("");
+    
     private String codigo;
     private String titular;
     private float saldo;

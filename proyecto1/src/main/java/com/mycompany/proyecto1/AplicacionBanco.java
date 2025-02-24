@@ -4,16 +4,23 @@
 
 package com.mycompany.proyecto1;
 
+import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.logging.FileHandler;
+import java.util.logging.Handler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 /**
  *
  * @author alvaro.gargon.4
  */
 public class AplicacionBanco {
-
-    public static void main(String[] args) throws SaldoInsuficienteException {
+    private static final Logger Log=Logger.getLogger("com.mycompany.proyecto1");
+    public static void main(String[] args) throws SaldoInsuficienteException, IOException {
+        
         Banco banco;
         boolean error;
         Cuenta cuenta=null,cuentaDestino=null;
@@ -22,6 +29,10 @@ public class AplicacionBanco {
         int opcion,opcion2;
         Scanner teclado=new Scanner(System.in);
         banco=new Banco("Sauces");
+        
+        Handler controlador=new FileHandler("./register.log",true);
+        controlador.setFormatter(new SimpleFormatter());
+        Log.addHandler(controlador);
         
         do{
             System.out.println("1- Abrir cuenta");
@@ -59,6 +70,7 @@ public class AplicacionBanco {
                                     System.out.println("No se puede abrir la cuenta " + cuenta);
                                 }
                             } catch (IllegalArgumentException | IbanException ex) {
+                                Log.log(Level.WARNING,ex.getMessage());
                                 System.out.println(ex.getMessage());
                                 error = true;
                             } catch (InputMismatchException ime) {
