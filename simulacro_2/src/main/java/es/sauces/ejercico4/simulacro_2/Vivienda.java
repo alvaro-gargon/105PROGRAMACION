@@ -53,9 +53,9 @@ public class Vivienda extends Inmueble{
     @Override
     public float getComision() {
         if(dormitorio==2){
-            return (float) (super.getPrecio()*0.02);
+            return (getPrecio()*0.02f);
         }else{
-            return (float) (super.getPrecio()*0.03);
+            return (getPrecio()*0.03f);
         }
     }
     

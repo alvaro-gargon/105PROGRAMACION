@@ -14,7 +14,7 @@ public class ComparadorPrecio implements Comparator<Inmueble>{
 
     @Override
     public int compare(Inmueble o1, Inmueble o2) {
-        return Float.compare(o1.getPrecio(), o2.getPrecio());
+        return Integer.compare(o1.getPrecio(), o2.getPrecio());
     }
     
 }

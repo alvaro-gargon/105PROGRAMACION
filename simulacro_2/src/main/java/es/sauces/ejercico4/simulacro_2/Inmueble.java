@@ -25,7 +25,7 @@ public abstract class Inmueble implements Comparable<Inmueble> {
 
     public Inmueble(String referencia) throws ReferenciaException {
         if(!referenciaValida(referencia)){
-            LOG.log(Level.SEVERE, referencia);
+            LOG.log(Level.INFO, "Se ha introducido una referencia invalida ");
             throw new ReferenciaException("La referencia no es valida");
         }
         this.referencia = referencia;
@@ -33,6 +33,7 @@ public abstract class Inmueble implements Comparable<Inmueble> {
 
     public Inmueble(String referencia, float superficie, int precio, TipoOperacion operacion) throws ReferenciaException {
         if(!referenciaValida(referencia)){
+            LOG.log(Level.INFO, "Se ha introducido una referencia invalida ");
             throw new ReferenciaException("La referencia no es valida");
         }
         this.referencia = referencia;
@@ -47,6 +48,7 @@ public abstract class Inmueble implements Comparable<Inmueble> {
 
     public void setReferencia(String referencia) throws ReferenciaException {
         if(!referenciaValida(referencia)){
+            LOG.log(Level.INFO, "Se ha introducido una referencia invalida ");
             throw new ReferenciaException("La referencia no es valida");
         }
         this.referencia = referencia;
@@ -58,6 +60,7 @@ public abstract class Inmueble implements Comparable<Inmueble> {
 
     public void setSuperficie(float superficie) {
         if(superficie<0){
+            LOG.log(Level.INFO, "Se ha introducido una superficie menor de 0 ");
             throw new IllegalArgumentException("La superficie no puede ser negativa");
         }
         this.superficie = superficie;
@@ -69,6 +72,7 @@ public abstract class Inmueble implements Comparable<Inmueble> {
 
     public void setPrecio(int precio) {
         if(precio<0){
+            LOG.log(Level.INFO, "Se ha introducido un precio menor de 0 ");
             throw new IllegalArgumentException("El precio no puede ser negativo");
         }
         this.precio = precio;

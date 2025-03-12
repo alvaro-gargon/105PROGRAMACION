@@ -36,7 +36,7 @@ public class Inmobiliaria {
     }
 
     public void setInmuebles(List<Inmueble> inmuebles) {
-        this.inmuebles = new TreeSet(inmuebles);
+        this.inmuebles = new TreeSet<>(inmuebles);
     }
     
     public boolean incluirInmueble(Inmueble inmueble){
@@ -46,10 +46,9 @@ public class Inmobiliaria {
     public boolean eliminarInmueble(String referencia){
         boolean elminiado;
         elminiado=false;
-        for(Inmueble i:inmuebles){
-            if(i.getReferencia().equals(referencia)){
-                return inmuebles.remove(i);
-            }
+        if(getInmueble(referencia)!=null){
+            inmuebles.remove(getInmueble(referencia));
+            elminiado=true;
         }
         return elminiado;
     }
@@ -64,9 +63,14 @@ public class Inmobiliaria {
     }
     
     public List<Inmueble> getViviendas(){
-        ArrayList listaPrecio = new ArrayList<>(inmuebles);
-        listaPrecio.sort(new ComparadorPrecio());
-        return listaPrecio;
+        List<Inmueble> listado = new ArrayList<>();
+        for(Inmueble i :inmuebles){
+            if(i instanceof Vivienda){
+                listado.add(i);
+            }
+        }
+        listado.sort(new ComparadorPrecio());
+        return listado;
     }
     
     public List<Inmueble> getInmuebles(TipoOperacion operacion){
@@ -76,20 +80,24 @@ public class Inmobiliaria {
                 listaInmueble.add(i);
             }
         }
+        //no hace fata ordenar porque con el TreeSet ya esta ordenado autoamticamente (por referencia)
         return listaInmueble;
     }
     
     public Local getLocalCompraMasBarato(){
-        ArrayList buscarLocalBarato= new ArrayList<>();
+        Local localBarato = null;
+        int precioCompra=Integer.MAX_VALUE;
         for(Inmueble i:inmuebles){
-            if(i instanceof Local){
+            if(i instanceof Local l){
                 if (TipoOperacion.COMPRAR==i.getOperacion()) {
-                    buscarLocalBarato.add(i);
+                    if(i.getPrecio()<precioCompra){
+                        precioCompra=i.getPrecio();
+                        localBarato=l;
+                    }
                 }
             }
         }
-        buscarLocalBarato.sort(new ComparadorPrecio());
-        return (Local) buscarLocalBarato.getLast();
+        return localBarato;
     }
     
     public int guardarInmuebles(String nombreArchivo) throws DaoException{
@@ -101,17 +109,12 @@ public class Inmobiliaria {
             try(BufferedWriter salida = Files.newBufferedWriter(path)) 
             {
                 for(Inmueble i: inmuebles){
-                    if(i instanceof Local){
-                        tipo="Local";
-                    }else{
-                        tipo="Vivienda";
-                    }
-                    salida.write(tipo + "," + super.toString());
+                    salida.write(i.getClass().getSimpleName() + "," + super.toString());
                     salida.newLine();
                     contador++;
                 }
             }catch(IOException ioe){
-                LOG.log(Level.INFO, "No se ha podido cargar los archivos");
+                LOG.log(Level.INFO, "No se ha podido guardar los archivos");
                 throw new DaoException("Error al guardar los inmuebles en el archivo");
             }
         return contador;
@@ -123,6 +126,7 @@ public class Inmobiliaria {
         String tipo,linea,dormitorios,escaparate,referencia;
         String[] lineaa;
         path=Paths.get(nombreArchivo);
+        Inmueble inmueble = null;
         contador=0;
         try(BufferedReader entrada=Files.newBufferedReader(path)){
             linea=entrada.readLine();
@@ -132,14 +136,16 @@ public class Inmobiliaria {
                 referencia=lineaa[1];
                 if("Local".equals(tipo)){
                     escaparate=lineaa[lineaa.length-1];
-                    new Local(referencia,Float.parseFloat(lineaa[2]),Integer.parseInt(lineaa[3])
+                    inmueble=new Local(referencia,Float.parseFloat(lineaa[2]),Integer.parseInt(lineaa[3])
                             ,TipoOperacion.valueOf(lineaa[4]),Float.parseFloat(escaparate));
                 }else{
                     dormitorios=lineaa[lineaa.length-1];
-                    new Vivienda(referencia,Float.parseFloat(lineaa[2]),Integer.parseInt(lineaa[3])
+                    inmueble=new Vivienda(referencia,Float.parseFloat(lineaa[2]),Integer.parseInt(lineaa[3])
                             ,TipoOperacion.valueOf(lineaa[4]),Integer.parseInt(dormitorios));
                 }
                 contador++;
+                inmuebles.add(inmueble);
+                linea=entrada.readLine();
             }
         } catch (IOException ex) {
             LOG.log(Level.INFO, "No se ha podido cargar los archivos");

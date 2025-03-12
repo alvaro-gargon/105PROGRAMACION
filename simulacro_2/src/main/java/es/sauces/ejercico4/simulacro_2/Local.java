@@ -53,7 +53,7 @@ public class Local extends Inmueble{
     
     @Override
     public float getComision() {
-        return (float) (super.getPrecio()*0.01);
+        return (getPrecio()*0.01f);
     }
     
 }
