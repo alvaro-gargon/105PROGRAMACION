@@ -24,11 +24,15 @@ import java.util.logging.Logger;
  */
 public class Inmobiliaria {
     private Set<Inmueble> inmuebles;
-     private static final Logger LOG = Logger.getLogger(Inmobiliaria.class.getName());
+    private static final Logger LOG = Logger.getLogger(Inmobiliaria.class.getName());
 
     public Inmobiliaria(Set<Inmueble> inmuebles) {
         this.inmuebles = inmuebles;
         inmuebles=new TreeSet();
+    }
+
+    Inmobiliaria() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     public List<Inmueble> getInmuebles() {

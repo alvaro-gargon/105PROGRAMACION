@@ -1,0 +1,100 @@
+José,9,10,2
+Jorge,3,7,1
+Patricia,5,6,9
+María,1,2,5
+Manuel,5,2,6
+Antonio,6,7,1
+Josefa,3,9,8
+David,6,6,6
+Juan,5,10,5
+María Jesús,3,8,4
+Ana María,3,2,3
+María Teresa,9,7,2
+María Pilar,4,3,10
+Mercedes,7,6,4
+Joaquín,9,4,2
+Jorge,10,3,7
+Carmen,1,1,5
+Rosa,8,2,7
+José Luis,8,9,8
+María Isabel,5,5,9
+María Teresa,7,2,4
+María Jesús,7,2,2
+José,6,3,5
+Manuel,6,10,8
+Antonio,6,5,6
+Francisco,3,10,9
+Adrián,7,3,6
+Carmen,8,10,8
+Alberto,5,6,7
+Francisco,9,4,3
+María,10,5,7
+María Ángeles,8,8,2
+Francisco,2,8,9
+Ana Isabel,10,1,4
+Jesús,3,2,7
+Concepción,7,4,2
+Miguel,6,1,4
+José Carlos,3,10,2
+Rocío,2,7,10
+Josefa,4,4,5
+María Carmen,1,8,7
+Antonio,1,7,4
+Alejandro,2,10,6
+Jesús,8,9,3
+Rafael,3,1,1
+José Luis,4,2,6
+Silvia,7,8,9
+María Luisa,2,7,4
+Manuel,7,7,3
+María Carmen,7,2,6
+Manuel,7,10,9
+Paula,4,5,4
+Elena,4,4,5
+Concepción,4,8,6
+José,2,5,4
+Rosa María,8,1,4
+Rafael,7,8,1
+Ricardo,7,4,10
+Joan,5,2,1
+Luis,4,4,9
+Paula,4,6,10
+Juan,2,10,5
+José,2,4,8
+Víctor,9,3,1
+Miguel,7,3,7
+Ana,5,3,7
+María Amparo,5,4,9
+Rosario,7,2,7
+Francisco,7,1,10
+Adrián,1,6,5
+Ana María,3,1,10
+Lucia,6,8,3
+Rosario,1,5,9
+María Concepción,8,3,9
+Yolanda,9,10,4
+José Antonio,2,3,4
+Aina,7,10,6
+Francisco,4,9,6
+Marina,9,10,4
+Pilar,4,4,5
+Miguel,2,7,2
+Montserrat,4,6,2
+Juan José,2,9,4
+Ángela,2,8,6
+Antonio,8,10,7
+Francisco Javier,3,4,9
+Juana,10,8,3
+David,10,5,8
+Dolores,6,8,6
+José María,2,2,7
+Ángeles,8,2,7
+Cristina,5,5,10
+Marc,4,4,7
+Sergio,8,8,4
+David,8,9,3
+María Teresa,4,4,4
+Javier,1,9,7
+Alberto,2,1,9
+Ana,3,6,10
+Yolanda,8,5,8

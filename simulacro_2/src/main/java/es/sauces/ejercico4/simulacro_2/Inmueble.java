@@ -26,7 +26,7 @@ public abstract class Inmueble implements Comparable<Inmueble> {
     public Inmueble(String referencia) throws ReferenciaException {
         if(!referenciaValida(referencia)){
             LOG.log(Level.INFO, "Se ha introducido una referencia invalida ");
-            throw new ReferenciaException("La referencia no es valida");
+            throw new ReferenciaException("La referencia no es valida "+referencia);
         }
         this.referencia = referencia;
     }
@@ -35,6 +35,10 @@ public abstract class Inmueble implements Comparable<Inmueble> {
         if(!referenciaValida(referencia)){
             LOG.log(Level.INFO, "Se ha introducido una referencia invalida ");
             throw new ReferenciaException("La referencia no es valida");
+        }
+        if(superficie<0 || precio<0){
+            LOG.log(Level.WARNING, "Superficie o precio menor de 0, superficie:{0} precio: {1}", new Object[]{superficie, precio});
+            throw new IllegalArgumentException("La superficie o el precio no pueden ser menor de 0");
         }
         this.referencia = referencia;
         this.superficie = superficie;
