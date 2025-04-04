@@ -1,0 +1,47 @@
+-J-Duser.language=
+-J-Duser.country=
+@options
+@packages
+-encoding
+'UTF-8'
+-protected
+-source
+'21'
+-sourcepath
+'C:/Users/alvaro.gargon.4/OneDrive - Educacyl/Documentos/NetBeansProjects/TestEEDD/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2025. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'C:/Users/alvaro.gargon.4/OneDrive - Educacyl/Documentos/NetBeansProjects/TestEEDD/target/reports/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'TestEEDD 1.0-SNAPSHOT API'
+-use
+-version
+-windowtitle
+'TestEEDD 1.0-SNAPSHOT API'
+es.sauces.ejercico4.testeedd
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\TestEEDD\src\main\java = 1743675505035
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\TestEEDD\target\reports\apidocs\allclasses-index.html = 1743680484973
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\TestEEDD\target\reports\apidocs\allpackages-index.html = 1743680484976
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\TestEEDD\target\reports\apidocs\copy.svg = 1743680485001
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\TestEEDD\target\reports\apidocs\element-list = 1743680484928
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\TestEEDD\target\reports\apidocs\help-doc.html = 1743680484996
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\TestEEDD\target\reports\apidocs\index-all.html = 1743680484987
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\TestEEDD\target\reports\apidocs\index.html = 1743680484992
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\TestEEDD\target\reports\apidocs\link.svg = 1743680485002
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\TestEEDD\target\reports\apidocs\member-search-index.js = 1743680484980
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\TestEEDD\target\reports\apidocs\module-search-index.js = 1743680484978
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\TestEEDD\target\reports\apidocs\overview-tree.html = 1743680484961
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\TestEEDD\target\reports\apidocs\package-search-index.js = 1743680484978
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\TestEEDD\target\reports\apidocs\script.js = 1743680485000
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\TestEEDD\target\reports\apidocs\search-page.js = 1743680485005
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\TestEEDD\target\reports\apidocs\search.html = 1743680484990
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\TestEEDD\target\reports\apidocs\search.js = 1743680485003
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\TestEEDD\target\reports\apidocs\stylesheet.css = 1743680484998
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\TestEEDD\target\reports\apidocs\tag-search-index.js = 1743680484981
+C:\Users\alvaro.gargon.4\OneDrive - Educacyl\Documentos\NetBeansProjects\TestEEDD\target\reports\apidocs\type-search-index.js = 1743680484979
