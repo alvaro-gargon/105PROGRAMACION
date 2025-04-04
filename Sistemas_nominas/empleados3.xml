@@ -1,0 +1,13 @@
+<list>
+  <es.sauces.ejercico4.sistemas__nominas.EmpleadoFijo>
+    <dni>12345678Z</dni>
+    <nombre>qwdafasd</nombre>
+    <salario>45767.0</salario>
+  </es.sauces.ejercico4.sistemas__nominas.EmpleadoFijo>
+  <es.sauces.ejercico4.sistemas__nominas.EmpleadoEventual>
+    <dni>71051506K</dni>
+    <nombre>alvaro</nombre>
+    <salarioHora>456.0</salarioHora>
+    <horas>678</horas>
+  </es.sauces.ejercico4.sistemas__nominas.EmpleadoEventual>
+</list>

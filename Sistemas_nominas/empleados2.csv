@@ -1,0 +1,2 @@
+EmpleadoFijo,Empleado{dni=12345678Z, nombre=Marcos},123.0
+EmpleadoEventual,Empleado{dni=71051506K, nombre=Alvaro},123.0,30

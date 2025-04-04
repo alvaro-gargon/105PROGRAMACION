@@ -19,11 +19,11 @@ public class EmpleadoEventual extends Empleado {
     public EmpleadoEventual() {
     }
 
-    public EmpleadoEventual(Dni dni) {
+    public EmpleadoEventual(String dni) throws DniException {
         super(dni);
     }
 
-    public EmpleadoEventual(Dni dni, String nombre,float salarioHora, int horas) {
+    public EmpleadoEventual(String dni, String nombre,float salarioHora, int horas) throws DniException {
         super(dni, nombre);
         if(salarioHora<0){
             LOG.log(Level.WARNING, "El salario ha sido menor de 0");

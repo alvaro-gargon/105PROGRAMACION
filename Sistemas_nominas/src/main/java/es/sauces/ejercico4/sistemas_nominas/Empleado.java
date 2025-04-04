@@ -4,33 +4,52 @@
  */
 package es.sauces.ejercico4.sistemas_nominas;
 
+import java.io.Serializable;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
  * @author alvaro.gargon.4
  */
-public abstract class  Empleado implements Comparable<Empleado> {
-    private Dni dni;
+public abstract class  Empleado implements Serializable,Comparable<Empleado> {
+    private String dni;
     private String nombre;
+    private static final Logger LOG = Logger.getLogger(Empleado.class.getName());
+    private static final long serialVersionUID=1L;
 
     public Empleado() {
     }
 
-    public Empleado(Dni dni) {
-        this.dni = dni;
+    public Empleado(String  dni) throws DniException {
+        if(!esDniValido(dni)){
+            LOG.log(Level.SEVERE, "El dni no es valido: "+dni);
+            throw new DniException("El dni no es valido: "+dni);
+        }
+        this.dni=dni;
     }
 
-    public Empleado(Dni dni, String nombre) {
+    public Empleado(String dni, String nombre) throws DniException {
+         if(!esDniValido(dni)){
+             LOG.log(Level.SEVERE, "El dni no es valido: "+dni);
+            throw new DniException("El dni no es valido: "+dni);
+        }
         this.dni = dni;
         this.nombre = nombre;
     }
 
-    public Dni getDni() {
+    public String getDni() {
         return dni;
     }
 
-    public void setDni(Dni dni) {
+    public void setDni(String dni) throws DniException {
+         if(!esDniValido(dni)){
+             LOG.log(Level.SEVERE, "El dni no es valido: "+dni);
+            throw new DniException("El dni no es valido: "+dni);
+        }
         this.dni = dni;
     }
 
@@ -75,10 +94,23 @@ public abstract class  Empleado implements Comparable<Empleado> {
 
     @Override
     public String toString() {
-        return "Empleado{" + "dni=" + dni + ", nombre=" + nombre + '}';
+        return   dni+","+nombre;
     }
     
-    
+    private static boolean esDniValido(String dni){
+        boolean valido=false;
+        String patron="([0-9]{8})([A-Z])";
+        String letras="TRWAGMYFPDXBNJZSQVHLCKE";
+        int posicion;
+        Pattern p=Pattern.compile(patron);
+        Matcher m=p.matcher(dni);
+        if(m.matches()){
+            posicion=Integer.parseInt(m.group(1))%23;
+            valido=letras.charAt(posicion)==m.group(2).charAt(0);
+            return valido;
+        }
+        return valido;
+    }
     
     public abstract float ingresos();
     

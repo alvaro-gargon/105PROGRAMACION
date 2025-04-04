@@ -18,10 +18,17 @@ import java.util.logging.Logger;
  */
 public class App_nominas {
     private static final Logger LOG =Logger.getLogger("es.sauces.ejercico4.sistemas_nominas");
-    public static void main(String[] args) throws IOException {
+
+    /**
+     *
+     * @param args
+     * @throws IOException
+     * @throws DaoException
+     */
+    public static void main(String[] args) throws IOException, DaoException {
         SistemaNominas sistemaNominas=new SistemaNominas(); 
         Empleado empleado=null;
-        String dni,nombre;
+        String dni,nombre,nombreArchivo;
         float salario,salarioHora;
         int opcion,opcion2,horas,comprobacion;
         Scanner teclado=new Scanner(System.in);
@@ -34,6 +41,8 @@ public class App_nominas {
             System.out.println("4-Listar empleado");
             System.out.println("5-Listar empleados por sueldo");
             System.out.println("6-Consultar total salarios");
+            System.out.println("7-Guardar empleados");
+            System.out.println("8-Cargar empleados");
             System.out.println("0-Salir");
             System.out.print("Introduzca tu opcion:");
             try{
@@ -58,14 +67,14 @@ public class App_nominas {
                                     try {
                                         System.out.println("Dame el salario");
                                         salario=teclado.nextFloat();
-                                        empleado=new EmpleadoFijo(Dni.valueOf(dni),nombre,salario);
+                                        empleado=new EmpleadoFijo(dni,nombre,salario);
                                         if(sistemaNominas.incluirEmpleado(empleado)){
                                             System.out.println("Empleado fijo creado con exito");
                                         }else{
                                             System.out.println("Error al crear un empleado fijo");
                                         }
                                     } catch (DniException |IllegalArgumentException|InputMismatchException ex) {
-                                        LOG.log(Level.WARNING, Arrays.toString(ex.getStackTrace()));
+                                        LOG.log(Level.SEVERE, "Error "+ex.getMessage());
                                         System.out.println(ex.getMessage());
                                     }finally {
                                     teclado.nextLine();
@@ -82,13 +91,13 @@ public class App_nominas {
                                         salarioHora=teclado.nextFloat();
                                         System.out.println("Dame las horas");
                                         horas=teclado.nextInt();
-                                        empleado=new EmpleadoEventual(Dni.valueOf(dni),nombre,salarioHora,horas);
+                                        empleado=new EmpleadoEventual(dni,nombre,salarioHora,horas);
                                         if(sistemaNominas.incluirEmpleado(empleado)){
                                             System.out.println("Empleado eventual creado con exito");
                                         }else{
                                             System.out.println("Error al crear un empleado eventual");
                                         }
-                                    } catch (DniException|IllegalArgumentException|InputMismatchException ex) {
+                                    } catch (IllegalArgumentException|InputMismatchException|DniException ex) {
                                         System.out.println(ex.getMessage());
                                     }finally {
                                         teclado.nextLine();
@@ -140,6 +149,30 @@ public class App_nominas {
                 case 6->{
                     System.out.println(sistemaNominas.getTotalSalarios());
                 }
+                case 7->{
+                    System.out.println("Introduzca el nombre del archivo");
+                    nombreArchivo=teclado.nextLine();
+                    EmpleadoDao dao=getDao(nombreArchivo);
+                    sistemaNominas.setEmpleadoDao(dao);
+                    try{
+                        System.out.println(sistemaNominas.guardarEmpleados());
+                        
+                    }catch(DaoException ex){
+                        System.out.println(ex.toString());
+                    }
+                    
+                }
+                case 8->{
+                    System.out.println("Introduzca el nombre del archivo");
+                    nombreArchivo=teclado.nextLine();
+                    EmpleadoDao dao=getDao(nombreArchivo);
+                    sistemaNominas.setEmpleadoDao(dao);
+                    try{
+                        System.out.println(sistemaNominas.cargarEmpleados());
+                    }catch(DaoException ex){
+                        System.out.println(ex.toString());
+                    }
+                }
                             
                 case 0->{System.out.println("Bye"); }
                             
@@ -147,5 +180,21 @@ public class App_nominas {
                         
             }          
         }while(opcion!=0);
+    }
+    
+    private static EmpleadoDao getDao(String nombreArchivo){
+        EmpleadoDao empleadoDao=null;
+        String extension = null;
+        int indice=nombreArchivo.lastIndexOf(".");
+        extension=nombreArchivo.substring(indice);
+        //lastindexof(.)
+        empleadoDao=switch(extension){
+            case ".csv" -> new EmpleadoCsv(nombreArchivo);
+            case ".obj" -> new EmpleadoObj(nombreArchivo);
+            case ".gson" -> new EmpleadoJson(nombreArchivo);
+            case ".xml" -> new EmpleadoXml(nombreArchivo);
+            default -> null;
+        };  
+        return empleadoDao;
     }
 }

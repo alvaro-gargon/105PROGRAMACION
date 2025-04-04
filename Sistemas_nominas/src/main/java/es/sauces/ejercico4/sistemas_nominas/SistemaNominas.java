@@ -12,11 +12,19 @@ import java.util.TreeSet;
  * @author alvaro.gargon.4
  */
 public class SistemaNominas {
-    
+    private EmpleadoDao empleadoDao;
     private Set<Empleado> empleados;
 
     public SistemaNominas() {
         empleados=new TreeSet<>();
+    }
+
+    public EmpleadoDao getEmpleadoDao() {
+        return empleadoDao;
+    }
+
+    public void setEmpleadoDao(EmpleadoDao empleadoDao) {
+        this.empleadoDao = empleadoDao;
     }
     
     
@@ -49,11 +57,26 @@ public class SistemaNominas {
     
     public float getTotalSalarios(){
         float acum;
-        Empleado empleado=null;
         acum=0;
         for(Empleado e:empleados){
            acum=acum+e.ingresos();
         }
         return acum;
+    }
+    
+    public int guardarEmpleados() throws DaoException{
+        if(empleadoDao==null){
+            throw new DaoException("Empleado null");
+        }
+        empleadoDao.insertar(new ArrayList<>(empleados));
+        return empleados.size();
+    }
+    
+    public int cargarEmpleados() throws DaoException{
+        if(empleadoDao==null){
+            throw new DaoException("Empleado null");
+        }
+        empleados=new TreeSet<>(empleadoDao.listar());
+        return empleados.size();
     }
 }

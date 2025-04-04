@@ -18,15 +18,15 @@ public class EmpleadoFijo extends Empleado {
     public EmpleadoFijo() {
     }
 
-    public EmpleadoFijo(Dni dni) {
+    public EmpleadoFijo(String dni) throws DniException {
         super(dni);
     }
 
-    public EmpleadoFijo(Dni dni, String nombre) {
+    public EmpleadoFijo(String dni, String nombre) throws DniException {
         super(dni, nombre);
     }
 
-    public EmpleadoFijo(Dni dni, String nombre,float salario) {
+    public EmpleadoFijo(String dni, String nombre,float salario) throws DniException {
         super(dni, nombre);
         if(salario<0){
             LOG.log(Level.WARNING, "La cantidad ha sido menor de 0");
