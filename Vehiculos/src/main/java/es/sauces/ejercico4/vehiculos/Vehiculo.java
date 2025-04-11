@@ -4,6 +4,7 @@
  */
 package es.sauces.ejercico4.vehiculos;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.logging.Level;
@@ -15,7 +16,7 @@ import java.util.regex.Pattern;
  *
  * @author alvaro.gargon.4
  */
-public abstract class  Vehiculo implements Comparable<Vehiculo> {
+public abstract class  Vehiculo implements Comparable<Vehiculo>,Serializable {
     private String matricula;
     private Grupo grupo;
     private static final Logger LOG = Logger.getLogger(Vehiculo.class.getName());
@@ -42,7 +43,7 @@ public abstract class  Vehiculo implements Comparable<Vehiculo> {
 
     @Override
     public String toString() {
-        return "Vehiculo{" + "matricula=" + matricula + ", grupo=" + grupo + '}';
+        return matricula + grupo;
     }
 
     public String getMatricula() {

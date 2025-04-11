@@ -15,6 +15,7 @@ import java.util.TreeMap;
  * @author alvaro.gargon.4
  */
 public class AgenciaAlquiler {
+ private VehiculoDao vehiculoDao;
  private String nombre;
  private Map<String,Vehiculo> vehiculos;
 
@@ -38,8 +39,14 @@ public class AgenciaAlquiler {
     public void setVehiculos(Map<String, Vehiculo> vehiculos) {
         this.vehiculos = vehiculos;
     }
+    public VehiculoDao getVehiculoDao() {
+        return vehiculoDao;
+    }
+
+    public void setVehiculoDao(VehiculoDao vehiculoDao) {
+        this.vehiculoDao = vehiculoDao;
+    }
     
- 
     public boolean incluirVehiculo(Vehiculo vehiculo){
         return vehiculos.putIfAbsent(vehiculo.getMatricula(), vehiculo)==null;
     }
@@ -71,5 +78,23 @@ public class AgenciaAlquiler {
     public Vehiculo getVehiculoMasBarato(){
         ArrayList buscarMenor = new ArrayList<>(vehiculos.values());
         return Collections.min(buscarMenor,new ComparadorPrecio());
+    }
+    
+    public int guardarVehiculos() throws DaoException{
+        if(vehiculoDao==null){
+            throw new DaoException("Empleado null");
+        }
+        vehiculoDao.insertar(new ArrayList<>(vehiculos.values()));
+        return vehiculos.size();
+    }
+    
+    public int cargarVehiculos() throws DaoException{
+        if(vehiculoDao==null){
+            throw new DaoException("Empleado null");
+        }
+        for (Vehiculo v : vehiculoDao.listar()) {
+            vehiculos.putIfAbsent(v.getMatricula(), v);
+        }
+        return vehiculos.size();
     }
 }

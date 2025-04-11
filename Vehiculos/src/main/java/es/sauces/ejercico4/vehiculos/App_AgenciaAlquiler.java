@@ -163,6 +163,28 @@ public class App_AgenciaAlquiler {
                     System.out.println(agenciaAlquiler.getVehiculoMasBarato());
                     System.out.println(agenciaAlquiler.getVehiculoMasBarato().getPrecioAlquiler());
                 }
+                case 10 -> {
+                    System.out.println("Introduzca el nombre del archivo");
+                String nombreArchivo = teclado.nextLine();
+                    VehiculoDao dao=getDao(nombreArchivo);
+                    agenciaAlquiler.setVehiculoDao(dao);
+                    try{
+                        System.out.println(agenciaAlquiler.guardarVehiculos());
+                    }catch(DaoException ex){
+                        System.out.println(ex.toString());
+                    }
+                }
+                case 11 -> {
+                    System.out.println("Introduzca el nombre del archivo");
+                    String nombreArchivo = teclado.nextLine();
+                    VehiculoDao dao=getDao(nombreArchivo);
+                    agenciaAlquiler.setVehiculoDao(dao);
+                    try{
+                        System.out.println(agenciaAlquiler.cargarVehiculos());
+                    }catch(DaoException ex){
+                        System.out.println(ex.toString());
+                    }
+                }
                             
                 case 0->{System.out.println("Bye"); }
                             
@@ -170,5 +192,20 @@ public class App_AgenciaAlquiler {
                         
             }          
         }while(opcion!=0);
+    }
+    private static VehiculoDao getDao(String nombreArchivo){
+        VehiculoDao vehiculoDao=null;
+        String extension = null;
+        int indice=nombreArchivo.lastIndexOf(".");
+        extension=nombreArchivo.substring(indice);
+        //lastindexof(.)
+        vehiculoDao=switch(extension){
+            case ".csv" -> new VehiculoCsv(nombreArchivo);
+            case ".obj" -> new VehiculoObj(nombreArchivo);
+            //case ".gson" -> new VehiculoJson(nombreArchivo);
+            //case ".xml" -> new VehiculoXml(nombreArchivo);
+            default -> null;
+        };  
+        return vehiculoDao;
     }
 }
