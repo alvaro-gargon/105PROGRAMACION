@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package es.sauces.ejercico4.vehiculos;
+package modelo;
 
+import modelo.ComparadorPrecio;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -79,6 +80,10 @@ public class AgenciaAlquiler {
         ArrayList buscarMenor = new ArrayList<>(vehiculos.values());
         return Collections.min(buscarMenor,new ComparadorPrecio());
     }
+    public Vehiculo getVehiculoMasCaro(){
+        ArrayList buscarMayor = new ArrayList<>(vehiculos.values());
+        return Collections.max(buscarMayor, new ComparadorPrecio());
+    }
     
     public int guardarVehiculos() throws DaoException{
         if(vehiculoDao==null){
@@ -92,8 +97,10 @@ public class AgenciaAlquiler {
         if(vehiculoDao==null){
             throw new DaoException("Empleado null");
         }
-        for (Vehiculo v : vehiculoDao.listar()) {
-            vehiculos.putIfAbsent(v.getMatricula(), v);
+        List<Vehiculo> listaVehiculos=vehiculoDao.listar();
+        vehiculos=new TreeMap<>();
+        for(Vehiculo e:listaVehiculos){
+            vehiculos.putIfAbsent(e.getMatricula(), e);
         }
         return vehiculos.size();
     }

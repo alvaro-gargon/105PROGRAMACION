@@ -2,8 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package es.sauces.ejercico4.vehiculos;
+package modelo;
 
+import modelo.VehiculoDao;
+import modelo.Vehiculo;
+import modelo.DaoException;
 import java.io.EOFException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
