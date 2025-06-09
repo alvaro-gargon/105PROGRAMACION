@@ -159,17 +159,17 @@ public class ControladorUsuarios {
         Path path = Paths.get(archivo);
         if (Files.exists(path)) {
             seguro = ventana.solicitarConfiramcion();
-            if (seguro) {
-                try (BufferedWriter bw = Files.newBufferedWriter(path)) {
-                    for (Usuario u : usuarioDao.listar()) {
-                        bw.write(u.toString());
-                        bw.newLine();
-                    }
-                } catch (IOException ex) {
-                    ventana.mostrarMensaje(ex.toString());
-                } catch (DaoException ex) {
-                    ventana.mostrarMensaje(ex.getMessage());
+        }
+        if (seguro) {
+            try (BufferedWriter bw = Files.newBufferedWriter(path)) {
+                for (Usuario u : usuarioDao.listar()) {
+                    bw.write(u.toString());
+                    bw.newLine();
                 }
+            } catch (IOException ex) {
+                ventana.mostrarMensaje(ex.toString());
+            } catch (DaoException ex) {
+                ventana.mostrarMensaje(ex.getMessage());
             }
         }
     }
@@ -210,7 +210,7 @@ public class ControladorUsuarios {
                     linea = br.readLine();
                 }
                 listar();
-            } catch (DaoException | IOException|ArrayIndexOutOfBoundsException ex) {
+            } catch (DaoException | IOException | ArrayIndexOutOfBoundsException ex) {
                 ventana.mostrarMensaje(ex.getMessage());
             }
         }

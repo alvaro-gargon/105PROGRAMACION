@@ -53,7 +53,6 @@ public class ConexionBD {
     public Connection getConnection() throws DaoException {
         Connection con=null; 
             try{
-                
                 con=DriverManager.getConnection(url, user, pass);
             } catch (SQLException ex) {
                 throw new DaoException(ex.getMessage());
