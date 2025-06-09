@@ -4,11 +4,6 @@
  */
 package modelo;
 
-import modelo.VehiculoDao;
-import modelo.Vehiculo;
-import modelo.Turismo;
-import modelo.Furgoneta;
-import modelo.DaoException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;

@@ -4,8 +4,6 @@
  */
 package modelo;
 
-import modelo.Vehiculo;
-import modelo.DaoException;
 import java.util.List;
 
 /**

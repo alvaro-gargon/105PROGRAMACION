@@ -13,24 +13,24 @@ import modelo.Vehiculo;
 
 /**
  *
- * @author alvaro.gargon.4
+ * @author marcos.fergar
  */
 public class VehiculoTableModel extends AbstractTableModel{
-    private List<Vehiculo> listadoVehiculos;
-    private String[] columnas={"MATRICULA","TIPO","GRUPO","PLAZAS","CAPACIDAD","PRECIO ALQUILER"};
-    
-     public VehiculoTableModel() {
-        listadoVehiculos=new ArrayList<>();
-    }
-    
-    public void setListadoVehiculos(List<Vehiculo> listado){
-        this.listadoVehiculos = listado;
-        this.fireTableDataChanged();
+    private List<Vehiculo> vehiculos;
+    private String[] columnas={"MATRICULA","TIPO","GRUPO","PLAZAS","CAPACIDAD","PRECIO ALQUILES"};
+
+    public VehiculoTableModel() {
+        vehiculos=new ArrayList<>();        
     }
 
+    public void setListado(List<Vehiculo> vehiculos) {
+        this.vehiculos = vehiculos;
+        this.fireTableDataChanged();
+    }        
+    
     @Override
     public int getRowCount() {
-        return listadoVehiculos.size();
+        return vehiculos.size();
     }
 
     @Override
@@ -40,15 +40,15 @@ public class VehiculoTableModel extends AbstractTableModel{
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Vehiculo vehiculo = listadoVehiculos.get(rowIndex);
+        Vehiculo vehiculo = vehiculos.get(rowIndex);
  
         return switch (columnIndex) {
             case 0 ->
                 vehiculo.getMatricula();
             case 1 ->
-                vehiculo.getClass().getSimpleName().toUpperCase();
+                vehiculo instanceof Turismo  ? "TURISMO" : "FURGONETA";
             case 2 ->
-                vehiculo.getGrupo();
+                vehiculo.getGrupo().toString();            
             case 3 ->
                 vehiculo instanceof Turismo v ? v.getPlazas():0;
             case 4 ->
@@ -70,8 +70,7 @@ public class VehiculoTableModel extends AbstractTableModel{
         return switch(columnIndex){
             case 0,1,2 -> String.class;
             case 3 -> Integer.class;
-            case 4,5 -> Float.class;
-
+            case 4,5 -> Float.class;            
             default -> null;
         };
     }

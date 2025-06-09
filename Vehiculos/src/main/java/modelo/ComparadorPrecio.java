@@ -4,6 +4,7 @@
  */
 package modelo;
 
+import modelo.Vehiculo;
 import java.util.Comparator;
 
 /**

@@ -4,6 +4,9 @@
  */
 package modelo;
 
+import modelo.Grupo;
+import modelo.Vehiculo;
+import modelo.MatriculaException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

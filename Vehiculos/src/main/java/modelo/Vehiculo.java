@@ -5,7 +5,6 @@
 package modelo;
 
 import modelo.MatriculaException;
-import modelo.Grupo;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Objects;
@@ -45,7 +44,7 @@ public abstract class  Vehiculo implements Comparable<Vehiculo>,Serializable {
 
     @Override
     public String toString() {
-        return matricula + grupo;
+        return matricula +","+ grupo;
     }
 
     public String getMatricula() {

@@ -4,11 +4,6 @@
  */
 package modelo;
 
-import modelo.VehiculoDao;
-import modelo.Vehiculo;
-import modelo.Turismo;
-import modelo.Furgoneta;
-import modelo.DaoException;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import java.io.BufferedReader;

@@ -9,7 +9,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
-        <exec.mainClass>es.sauces.ejercico4.vehiculos.App_AgenciaAlquiler</exec.mainClass>
+        <exec.mainClass>es.sauces.ejercico4.vehiculos.AppAlquilerMVC</exec.mainClass>
     </properties>
     <dependencies>
         <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
@@ -51,7 +51,7 @@
                         <configuration>
                             <archive>
                                 <manifest>
-                                    <mainClass> es.sauces.Sistemas_nominas.App_nominas </mainClass>
+                                    <mainClass> es.sauces.ejercico4.vehiculos.AppAlquilerMVC</mainClass>
                                 </manifest>
                             </archive>
                             <descriptorRefs>

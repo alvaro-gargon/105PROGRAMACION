@@ -5,7 +5,6 @@
 package vista;
 
 import controlador.Controlador;
-import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,13 +12,13 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import modelo.ComparadorPrecio;
+import modelo.DaoException;
 import modelo.MatriculaException;
 import modelo.Vehiculo;
 
 /**
  *
- * @author alvaro.gargon.4
+ * @author marcos.fergar
  */
 public class Ventana extends javax.swing.JFrame {
 
@@ -28,98 +27,6 @@ public class Ventana extends javax.swing.JFrame {
      */
     public Ventana() {
         initComponents();
-    }
-    private DialogoVehiculo dialogoVehiculo=new DialogoVehiculo(this,true);
-    private Controlador controlador;
-    
-    public String getMatricula(){
-        return this.textFieldMatricula.getText();
-    }
-    
-    public String getGrupo(){
-        return this.comboBoxGrupo.getSelectedItem().toString();
-    }
-    
-    public String getTipo(){
-        return this.comboBoxTipo.getSelectedItem().toString();
-    }
-    
-    public int getPlazas(){
-        return (Integer)this.spinnerPlazas.getValue();
-    }
-    
-    public float getCapacidad(){
-        return Float.parseFloat(this.formattedTextFieldCapacidad.getValue().toString());
-    }
-    
-    public String getArchivo(){
-        return this.selectorFicheros.getSelectedFile().getAbsolutePath();
-    }
-    
-    public String getOrden(){
-        return this.buttonGroup1.getSelection().getActionCommand();
-    }
-    
-    public String getFiltroGrupo(){
-        return this.comboBoxFiltrarGrupo.getSelectedItem().toString();
-    }
-    
-    public String getFiltroTipo(){
-        return this.comboBoxFiltrarTipo.getSelectedItem().toString();
-    }
-    
-    
-    public void mostrarMatricula(String matricula){
-        this.textFieldMatricula.setText(matricula);
-    }
-    
-    public void mostrarTipo(String tipo){
-        this.comboBoxTipo.setSelectedItem(tipo);
-    }
-    
-    public void mostrarGrupo(String grupo){
-        this.comboBoxGrupo.setSelectedItem(grupo);
-    }
-    
-    public void mostrarPlazas(int plazas){
-        this.spinnerPlazas.setValue(plazas);
-    }
-    
-    public void mostrarCapacidad(float capacidad){
-        this.formattedTextFieldCapacidad.setValue(capacidad);
-    }
-    
-    public void mostrarPrecioAlquiler(float precio){
-        this.formatedTextFieldPrecioAlquiler.setValue(precio);
-    }
-    
-    public void listarVehiculos(List<Vehiculo> listado){
-        vehiculoTM.setListadoVehiculos(listado);
-    }
-    
-    public void limpiarCampos(){
-        this.textFieldMatricula.setText("");
-        this.spinnerPlazas.setValue(0);
-        this.formattedTextFieldCapacidad.setText("");
-        this.formatedTextFieldPrecioAlquiler.setText("");
-    }
-    
-    public void mostrar(){
-        setVisible(true);
-    }
-    
-     public boolean solicitarConfiramcion(){
-        int opcion = JOptionPane.showConfirmDialog(this, 
-            "¿Está seguro que desea continuar?", "Confirmación", JOptionPane.YES_NO_OPTION);
-        return opcion == JOptionPane.YES_OPTION;
-    }
-    
-    public void setControlador(Controlador controlador) {
-        this.controlador = controlador;
-    }
-    
-    public void mostrarMensaje(String mensaje){
-        JOptionPane.showMessageDialog(this, mensaje);
     }
 
     /**
@@ -131,38 +38,38 @@ public class Ventana extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        grupoBotonesListado = new javax.swing.ButtonGroup();
         selectorFicheros = new javax.swing.JFileChooser();
-        buttonGroup1 = new javax.swing.ButtonGroup();
-        panelDatos = new javax.swing.JPanel();
+        datosVehiculos = new javax.swing.JPanel();
         labelMatricula = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        botonBarato = new javax.swing.JButton();
-        botonCaro = new javax.swing.JButton();
-        textFieldMatricula = new javax.swing.JTextField();
         labelGrupo = new javax.swing.JLabel();
-        comboBoxGrupo = new javax.swing.JComboBox<>();
         labelTipo = new javax.swing.JLabel();
-        comboBoxTipo = new javax.swing.JComboBox<>();
         labelPlazas = new javax.swing.JLabel();
+        labelPrecio = new javax.swing.JLabel();
+        comboGrupo = new javax.swing.JComboBox<>();
+        comboTipo = new javax.swing.JComboBox<>();
+        textMatricula = new javax.swing.JTextField();
         spinnerPlazas = new javax.swing.JSpinner();
-        labelPrecioDia = new javax.swing.JLabel();
+        formatedPrecio = new javax.swing.JFormattedTextField();
         botonBorrar = new javax.swing.JButton();
         botonModificar = new javax.swing.JButton();
+        otrasOperaciones = new javax.swing.JPanel();
+        botonVehiculoBarato = new javax.swing.JButton();
+        botonVehiculoCaro = new javax.swing.JButton();
         labelCapacidad = new javax.swing.JLabel();
-        formattedTextFieldCapacidad = new javax.swing.JFormattedTextField();
-        formatedTextFieldPrecioAlquiler = new javax.swing.JFormattedTextField();
-        jPanel2 = new javax.swing.JPanel();
-        botonListar = new javax.swing.JButton();
+        formatedCapacidad = new javax.swing.JFormattedTextField();
+        listadoVehiculos = new javax.swing.JPanel();
+        botonVehiculos = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        labelOrden = new javax.swing.JLabel();
-        radioBotonMatricula = new javax.swing.JRadioButton();
-        radioBotonPrecioAlquiler = new javax.swing.JRadioButton();
-        labelFiltrarPorGrupo = new javax.swing.JLabel();
-        labelFiltrarPorTipo = new javax.swing.JLabel();
-        comboBoxFiltrarGrupo = new javax.swing.JComboBox<>();
-        comboBoxFiltrarTipo = new javax.swing.JComboBox<>();
-        jMenuBar1 = new javax.swing.JMenuBar();
+        tablaVehiculos = new javax.swing.JTable();
+        labelOrdenListado = new javax.swing.JLabel();
+        botonMatricula = new javax.swing.JRadioButton();
+        botonPrecio = new javax.swing.JRadioButton();
+        labelFiltroGRupo = new javax.swing.JLabel();
+        comboFiltroGrupo = new javax.swing.JComboBox<>();
+        labelFiltroTipo = new javax.swing.JLabel();
+        comboFiltroTipo = new javax.swing.JComboBox<>();
+        menus = new javax.swing.JMenuBar();
         menuArchivo = new javax.swing.JMenu();
         menuAbrir = new javax.swing.JMenuItem();
         menuGuardar = new javax.swing.JMenuItem();
@@ -172,75 +79,39 @@ public class Ventana extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        panelDatos.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 255, 255)), "Datos de vehiculo"));
+        datosVehiculos.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos de vehiculo"));
 
-        labelMatricula.setText("MATRÍCULA");
+        labelMatricula.setText("MATRICULA");
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 255, 255)), "Otras operaciones"));
+        labelGrupo.setText("TIPO");
 
-        botonBarato.setText("MOSTRAR VEHICULO MÁS BARATO");
-        botonBarato.setActionCommand("BARATO");
-        botonBarato.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonBaratoActionPerformed(evt);
-            }
-        });
-
-        botonCaro.setText("MOSTRAR VEHICULO MÁS CARO");
-        botonCaro.setActionCommand("CARO");
-        botonCaro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonCaroActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(botonBarato, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(botonCaro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(49, 49, 49)
-                .addComponent(botonBarato)
-                .addGap(34, 34, 34)
-                .addComponent(botonCaro)
-                .addContainerGap(34, Short.MAX_VALUE))
-        );
-
-        textFieldMatricula.setEditable(false);
-
-        labelGrupo.setText("GRUPO");
-
-        comboBoxGrupo.setEditable(true);
-        comboBoxGrupo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "B", "C" }));
-        comboBoxGrupo.setEnabled(false);
-        comboBoxGrupo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboBoxGrupoActionPerformed(evt);
-            }
-        });
-
-        labelTipo.setText("Tipo");
-
-        comboBoxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TURISMO", "FURGONETA" }));
-        comboBoxTipo.setEnabled(false);
-        comboBoxTipo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboBoxTipoActionPerformed(evt);
-            }
-        });
+        labelTipo.setText("GRUPO");
 
         labelPlazas.setText("PLAZAS");
 
-        labelPrecioDia.setText("PRECIO POR DÍA");
+        labelPrecio.setText("PRECIO POR DIA");
+
+        comboGrupo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "B", "C" }));
+        comboGrupo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboGrupoActionPerformed(evt);
+            }
+        });
+
+        comboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Turismo", "Furgoneta" }));
+        comboTipo.setEnabled(false);
+        comboTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboTipoActionPerformed(evt);
+            }
+        });
+
+        formatedPrecio.setValue(0.0f);
+        formatedPrecio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                formatedPrecioActionPerformed(evt);
+            }
+        });
 
         botonBorrar.setText("BORRAR");
         botonBorrar.addActionListener(new java.awt.event.ActionListener() {
@@ -256,203 +127,241 @@ public class Ventana extends javax.swing.JFrame {
             }
         });
 
-        labelCapacidad.setText("CAPACIDAD");
-        labelCapacidad.setVisible(false);
+        otrasOperaciones.setBorder(javax.swing.BorderFactory.createTitledBorder("Otras operaciones"));
 
-        formattedTextFieldCapacidad.setValue(0.0f);
-        formattedTextFieldCapacidad.setVisible(false);
-
-        formatedTextFieldPrecioAlquiler.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
-        formatedTextFieldPrecioAlquiler.setValue(0.0f);
-
-        javax.swing.GroupLayout panelDatosLayout = new javax.swing.GroupLayout(panelDatos);
-        panelDatos.setLayout(panelDatosLayout);
-        panelDatosLayout.setHorizontalGroup(
-            panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelDatosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelDatosLayout.createSequentialGroup()
-                        .addComponent(botonBorrar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(botonModificar))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(panelDatosLayout.createSequentialGroup()
-                        .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelPrecioDia)
-                            .addComponent(labelCapacidad))
-                        .addGap(26, 26, 26)
-                        .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(formattedTextFieldCapacidad)
-                            .addComponent(formatedTextFieldPrecioAlquiler)))
-                    .addGroup(panelDatosLayout.createSequentialGroup()
-                        .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelDatosLayout.createSequentialGroup()
-                                    .addComponent(labelPlazas)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(spinnerPlazas, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelDatosLayout.createSequentialGroup()
-                                    .addComponent(labelGrupo)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(comboBoxGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(labelMatricula))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(textFieldMatricula)
-                            .addGroup(panelDatosLayout.createSequentialGroup()
-                                .addComponent(labelTipo)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(comboBoxTipo, 0, 107, Short.MAX_VALUE)))))
-                .addContainerGap())
-        );
-        panelDatosLayout.setVerticalGroup(
-            panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelDatosLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelMatricula)
-                    .addComponent(textFieldMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelGrupo)
-                    .addComponent(comboBoxGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelTipo)
-                    .addComponent(comboBoxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelPlazas)
-                    .addComponent(spinnerPlazas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
-                .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(formattedTextFieldCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(48, 48, 48)
-                .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelPrecioDia)
-                    .addComponent(formatedTextFieldPrecioAlquiler, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
-                .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botonBorrar)
-                    .addComponent(botonModificar))
-                .addGap(46, 46, 46)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 255, 255)), "Listado de vehículos"));
-
-        botonListar.setText("LISTAR VEHÍCULOS");
-        botonListar.addActionListener(new java.awt.event.ActionListener() {
+        botonVehiculoBarato.setText("MOSTRAR VEHICULO MAS BARATO");
+        botonVehiculoBarato.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonListarActionPerformed(evt);
+                botonVehiculoBaratoActionPerformed(evt);
             }
         });
 
-        vehiculoTM=new VehiculoTableModel();
-        jTable1.setModel(vehiculoTM);
-        jTable1.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(jTable1);
-        jTable1.getSelectionModel().addListSelectionListener(new ListSelectionListener(){public void valueChanged(ListSelectionEvent lse){
-            int fila=jTable1.getSelectedRow();
+        botonVehiculoCaro.setText("MOSTRAR VEHICULO MAS CARO");
+        botonVehiculoCaro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonVehiculoCaroActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout otrasOperacionesLayout = new javax.swing.GroupLayout(otrasOperaciones);
+        otrasOperaciones.setLayout(otrasOperacionesLayout);
+        otrasOperacionesLayout.setHorizontalGroup(
+            otrasOperacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(otrasOperacionesLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(otrasOperacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(botonVehiculoBarato, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
+                    .addComponent(botonVehiculoCaro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        otrasOperacionesLayout.setVerticalGroup(
+            otrasOperacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(otrasOperacionesLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(botonVehiculoBarato)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addComponent(botonVehiculoCaro)
+                .addGap(15, 15, 15))
+        );
+
+        labelCapacidad.setText("Capacidad");
+
+        formatedCapacidad.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        formatedCapacidad.setValue(0.0f);
+        formatedCapacidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                formatedCapacidadActionPerformed(evt);
+            }
+        });
+        formatedCapacidad.setVisible(false);
+
+        javax.swing.GroupLayout datosVehiculosLayout = new javax.swing.GroupLayout(datosVehiculos);
+        datosVehiculos.setLayout(datosVehiculosLayout);
+        datosVehiculosLayout.setHorizontalGroup(
+            datosVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(datosVehiculosLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(datosVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(datosVehiculosLayout.createSequentialGroup()
+                        .addGap(13, 13, 13)
+                        .addComponent(botonBorrar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(botonModificar)
+                        .addGap(41, 41, 41))
+                    .addGroup(datosVehiculosLayout.createSequentialGroup()
+                        .addGroup(datosVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(otrasOperaciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(datosVehiculosLayout.createSequentialGroup()
+                                .addComponent(labelTipo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(comboGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                                .addComponent(labelGrupo)
+                                .addGap(12, 12, 12)
+                                .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(datosVehiculosLayout.createSequentialGroup()
+                                .addComponent(labelPlazas)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())
+                    .addGroup(datosVehiculosLayout.createSequentialGroup()
+                        .addGroup(datosVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelCapacidad)
+                            .addGroup(datosVehiculosLayout.createSequentialGroup()
+                                .addComponent(labelMatricula)
+                                .addGap(16, 16, 16)
+                                .addComponent(textMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(datosVehiculosLayout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addGroup(datosVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, datosVehiculosLayout.createSequentialGroup()
+                        .addComponent(labelPrecio)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(formatedPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(datosVehiculosLayout.createSequentialGroup()
+                        .addGap(94, 94, 94)
+                        .addGroup(datosVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(formatedCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(spinnerPlazas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        datosVehiculosLayout.setVerticalGroup(
+            datosVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(datosVehiculosLayout.createSequentialGroup()
+                .addGap(13, 13, 13)
+                .addGroup(datosVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelMatricula)
+                    .addComponent(textMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addGroup(datosVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelGrupo)
+                    .addComponent(labelTipo)
+                    .addComponent(comboGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(datosVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelPlazas)
+                    .addComponent(spinnerPlazas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
+                .addGroup(datosVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelCapacidad)
+                    .addComponent(formatedCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(datosVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelPrecio)
+                    .addComponent(formatedPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(datosVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botonBorrar)
+                    .addComponent(botonModificar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(otrasOperaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        listadoVehiculos.setBorder(javax.swing.BorderFactory.createTitledBorder("Listado de vehiculos"));
+
+        botonVehiculos.setText("LISTAR VEHICULOS");
+        botonVehiculos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonVehiculosActionPerformed(evt);
+            }
+        });
+
+        tableModelTM2=new VehiculoTableModel();
+        tablaVehiculos.setModel(tableModelTM2);
+        jScrollPane1.setViewportView(tablaVehiculos);
+        tablaVehiculos.getSelectionModel().addListSelectionListener(new ListSelectionListener(){public void valueChanged(ListSelectionEvent lse){
+            int fila=tablaVehiculos.getSelectedRow();
             if(fila>=0){
-                mostrarMatricula((String)jTable1.getValueAt(fila, 0));
-                mostrarTipo((Integer)jTable1.getValueAt(fila, 1)==0?"TURISMO":"FURGONETA");
-                mostrarGrupo((String)jTable1.getValueAt(fila, 2));
-                mostrarPlazas((Integer)jTable1.getValueAt(fila, 3));
-                mostrarCapacidad((Float)jTable1.getValueAt(fila, 4));
-                mostrarPrecioAlquiler((Float)jTable1.getValueAt(fila, 5));
+                mostrarMatricula((String)tablaVehiculos.getValueAt(fila, 0));
+                mostrarTipo((Integer)tablaVehiculos.getValueAt(fila, 1)==0?"Turismo":"Furgoneta");
+                mostrarGrupo((String)tablaVehiculos.getValueAt(fila, 2));
+                mostrarPlazas((Integer)tablaVehiculos.getValueAt(fila, 3));
+                mostrarCapacidad((Float)tablaVehiculos.getValueAt(fila, 4));
+                mostrarPrecioAlquiler((Float)tablaVehiculos.getValueAt(fila, 5));
             }
         }
     });
 
-    labelOrden.setText("ORDEN DEL LISTADO");
+    labelOrdenListado.setText("ORDEN DEL LISTADO");
 
-    buttonGroup1.add(radioBotonMatricula);
-    radioBotonMatricula.setSelected(true);
-    radioBotonMatricula.setText("MATRICULA");
-    radioBotonMatricula.setActionCommand("MATRICULA");
-    radioBotonMatricula.addActionListener(new java.awt.event.ActionListener() {
+    grupoBotonesListado.add(botonMatricula);
+    botonMatricula.setSelected(true);
+    botonMatricula.setActionCommand("MATRICULA");
+    botonMatricula.setText("MATRICULA");
+    botonMatricula.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
-            radioBotonMatriculaActionPerformed(evt);
+            botonMatriculaActionPerformed(evt);
         }
     });
 
-    buttonGroup1.add(radioBotonPrecioAlquiler);
-    radioBotonPrecioAlquiler.setText("PRECIO ALQUILER");
-    radioBotonPrecioAlquiler.setActionCommand("PRECIO ALQUILER");
-    radioBotonPrecioAlquiler.addActionListener(new java.awt.event.ActionListener() {
+    grupoBotonesListado.add(botonPrecio);
+    botonPrecio.setText("PRECIO ALQUILER");
+    botonPrecio.setActionCommand("PRECIO ALQUILER");
+
+    labelFiltroGRupo.setText("FILTRAR POR GRUPO");
+
+    comboFiltroGrupo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TODOS", "A", "B", "C" }));
+    comboFiltroGrupo.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
-            radioBotonPrecioAlquilerActionPerformed(evt);
+            comboFiltroGrupoActionPerformed(evt);
         }
     });
 
-    labelFiltrarPorGrupo.setText("FILTRAR POR GRUPO");
+    labelFiltroTipo.setText("FILTRAR POR TIPO");
 
-    labelFiltrarPorTipo.setText("FILTRAR POR TIPO");
+    comboFiltroTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TURISMO", "FURGONETA", " " }));
 
-    comboBoxFiltrarGrupo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TODOS", "A", "B", "C" }));
-    comboBoxFiltrarGrupo.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            comboBoxFiltrarGrupoActionPerformed(evt);
-        }
-    });
-
-    comboBoxFiltrarTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TURISMO", "FURGONETA" }));
-    comboBoxFiltrarTipo.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            comboBoxFiltrarTipoActionPerformed(evt);
-        }
-    });
-
-    javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-    jPanel2.setLayout(jPanel2Layout);
-    jPanel2Layout.setHorizontalGroup(
-        jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(jPanel2Layout.createSequentialGroup()
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addGap(172, 172, 172)
-                    .addComponent(botonListar))
-                .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addGap(27, 27, 27)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addComponent(labelOrden)
-                            .addGap(76, 76, 76)
-                            .addComponent(labelFiltrarPorGrupo)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(comboBoxFiltrarGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(labelFiltrarPorTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(comboBoxFiltrarTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 531, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addComponent(radioBotonMatricula)
-                            .addGap(26, 26, 26)
-                            .addComponent(radioBotonPrecioAlquiler)))))
-            .addContainerGap())
+    javax.swing.GroupLayout listadoVehiculosLayout = new javax.swing.GroupLayout(listadoVehiculos);
+    listadoVehiculos.setLayout(listadoVehiculosLayout);
+    listadoVehiculosLayout.setHorizontalGroup(
+        listadoVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(listadoVehiculosLayout.createSequentialGroup()
+            .addGroup(listadoVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(listadoVehiculosLayout.createSequentialGroup()
+                    .addGap(292, 292, 292)
+                    .addComponent(botonVehiculos))
+                .addGroup(listadoVehiculosLayout.createSequentialGroup()
+                    .addGap(38, 38, 38)
+                    .addComponent(labelOrdenListado)
+                    .addGap(110, 110, 110)
+                    .addComponent(labelFiltroGRupo)
+                    .addGap(18, 18, 18)
+                    .addComponent(comboFiltroGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(35, 35, 35)
+                    .addComponent(labelFiltroTipo)
+                    .addGap(18, 18, 18)
+                    .addComponent(comboFiltroTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(listadoVehiculosLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(botonMatricula)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(botonPrecio))
+                .addGroup(listadoVehiculosLayout.createSequentialGroup()
+                    .addGap(23, 23, 23)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 660, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
-    jPanel2Layout.setVerticalGroup(
-        jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(jPanel2Layout.createSequentialGroup()
-            .addGap(31, 31, 31)
-            .addComponent(botonListar)
-            .addGap(29, 29, 29)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(61, 61, 61)
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(labelOrden)
-                .addComponent(labelFiltrarPorGrupo)
-                .addComponent(labelFiltrarPorTipo)
-                .addComponent(comboBoxFiltrarGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(comboBoxFiltrarTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGap(61, 61, 61)
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(radioBotonMatricula)
-                .addComponent(radioBotonPrecioAlquiler))
-            .addContainerGap(222, Short.MAX_VALUE))
+    listadoVehiculosLayout.setVerticalGroup(
+        listadoVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(listadoVehiculosLayout.createSequentialGroup()
+            .addGap(14, 14, 14)
+            .addComponent(botonVehiculos)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(12, 12, 12)
+            .addGroup(listadoVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(labelOrdenListado)
+                .addComponent(labelFiltroGRupo)
+                .addComponent(comboFiltroGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(labelFiltroTipo)
+                .addComponent(comboFiltroTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(listadoVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(botonMatricula)
+                .addComponent(botonPrecio))
+            .addContainerGap(14, Short.MAX_VALUE))
     );
 
     menuArchivo.setText("Archivo");
@@ -473,9 +382,9 @@ public class Ventana extends javax.swing.JFrame {
     });
     menuArchivo.add(menuGuardar);
 
-    jMenuBar1.add(menuArchivo);
+    menus.add(menuArchivo);
 
-    menuVehiculo.setText("Vehículo");
+    menuVehiculo.setText("Vehiculo");
 
     menuNuevo.setText("Nuevo");
     menuNuevo.addActionListener(new java.awt.event.ActionListener() {
@@ -493,89 +402,45 @@ public class Ventana extends javax.swing.JFrame {
     });
     menuVehiculo.add(menuBuscar);
 
-    jMenuBar1.add(menuVehiculo);
+    menus.add(menuVehiculo);
 
-    setJMenuBar(jMenuBar1);
+    setJMenuBar(menus);
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(layout.createSequentialGroup()
-            .addGap(42, 42, 42)
-            .addComponent(panelDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(18, 18, 18)
-            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addContainerGap()
+            .addComponent(datosVehiculos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(listadoVehiculos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
     );
     layout.setVerticalGroup(
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(panelDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGap(58, 58, 58))
+        .addGroup(layout.createSequentialGroup()
+            .addComponent(listadoVehiculos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(0, 0, Short.MAX_VALUE))
+        .addGroup(layout.createSequentialGroup()
+            .addGap(78, 78, 78)
+            .addComponent(datosVehiculos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addContainerGap())
     );
 
     pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void comboBoxGrupoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxGrupoActionPerformed
+    private void formatedPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_formatedPrecioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_comboBoxGrupoActionPerformed
+    }//GEN-LAST:event_formatedPrecioActionPerformed
 
-    private void menuAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAbrirActionPerformed
-        if(selectorFicheros.showOpenDialog(this)==JFileChooser.APPROVE_OPTION){
-            controlador.cargarVehiculo();
-        }
-    }//GEN-LAST:event_menuAbrirActionPerformed
+    private void formatedCapacidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_formatedCapacidadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formatedCapacidadActionPerformed
 
-    private void comboBoxTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxTipoActionPerformed
-        if(this.comboBoxTipo.getSelectedItem()=="TURISMO"){
-            this.labelPlazas.setVisible(true);
-            this.spinnerPlazas.setVisible(true);
-            this.labelCapacidad.setVisible(false);
-            this.formattedTextFieldCapacidad.setVisible(false);
-        }else {
-            this.labelPlazas.setVisible(false);
-            this.spinnerPlazas.setVisible(false);
-            this.labelCapacidad.setVisible(true);
-            this.formattedTextFieldCapacidad.setVisible(true);
-        }
-    }//GEN-LAST:event_comboBoxTipoActionPerformed
-
-    private void menuNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNuevoActionPerformed
-        
-        if(dialogoVehiculo.mostrar()==DialogoVehiculo.ACEPTAR){
-            mostrarMatricula(dialogoVehiculo.getMatricula());
-            mostrarTipo(dialogoVehiculo.getTipo());
-            mostrarGrupo(dialogoVehiculo.getGrupo());
-            mostrarPlazas(dialogoVehiculo.getPlazas());
-            mostrarCapacidad(dialogoVehiculo.getCapacidad());           
-            try {
-                controlador.crearVehiculo();
-            } catch (MatriculaException ex) {
-                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        
-    }//GEN-LAST:event_menuNuevoActionPerformed
-
-    private void menuBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuBuscarActionPerformed
-        String matricula=JOptionPane.showInputDialog(this, "Matricula a buscar");
-        if(matricula!=null){
-            limpiarCampos();
-            mostrarMatricula(matricula);
-            controlador.buscarVehiculo();
-        }
-    }//GEN-LAST:event_menuBuscarActionPerformed
-
-    private void menuGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGuardarActionPerformed
-        if(selectorFicheros.showSaveDialog(this)==JFileChooser.APPROVE_OPTION){
-            controlador.guardarVehiculo();
-        }
-    }//GEN-LAST:event_menuGuardarActionPerformed
+    private void comboGrupoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboGrupoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboGrupoActionPerformed
 
     private void botonBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBorrarActionPerformed
         if(!getMatricula().isBlank()){
@@ -587,33 +452,79 @@ public class Ventana extends javax.swing.JFrame {
         controlador.modificarVehiculo();
     }//GEN-LAST:event_botonModificarActionPerformed
 
-    private void botonListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonListarActionPerformed
-        controlador.listarVehiculo();
-    }//GEN-LAST:event_botonListarActionPerformed
+    private void menuNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNuevoActionPerformed
+        if(dialogo.mostrar()==DialogoVehiculo.ACEPTAR){
+            mostrarMatricula(dialogo.getMatricula());
+            mostrarTipo(dialogo.getTipo());
+            mostrarGrupo(dialogo.getGrupo());
+            mostrarPlazas(dialogo.getPlazas());
+            mostrarCapacidad(dialogo.getCapacidad());           
+            try {
+                controlador.crearVehiculo();
+            } catch (MatriculaException ex) {
+                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_menuNuevoActionPerformed
 
-    private void comboBoxFiltrarGrupoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxFiltrarGrupoActionPerformed
-        controlador.listarVehiculo();
-    }//GEN-LAST:event_comboBoxFiltrarGrupoActionPerformed
+    private void comboTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTipoActionPerformed
+        if(this.comboTipo.getSelectedItem()=="Turismo"){
+            this.labelPlazas.setVisible(true);
+            this.spinnerPlazas.setVisible(true);
+            this.labelCapacidad.setVisible(false);
+            this.formatedCapacidad.setVisible(false);
+        }else {
+            this.labelPlazas.setVisible(false);
+            this.spinnerPlazas.setVisible(false);
+            this.labelCapacidad.setVisible(true);
+            this.formatedCapacidad.setVisible(true);
+        }                           
+    }//GEN-LAST:event_comboTipoActionPerformed
 
-    private void comboBoxFiltrarTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxFiltrarTipoActionPerformed
-        controlador.listarVehiculo();
-    }//GEN-LAST:event_comboBoxFiltrarTipoActionPerformed
+    private void botonMatriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonMatriculaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonMatriculaActionPerformed
 
-    private void botonBaratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBaratoActionPerformed
+    private void botonVehiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVehiculosActionPerformed
+        controlador.listarVehiculo();
+    }//GEN-LAST:event_botonVehiculosActionPerformed
+
+    private void botonVehiculoBaratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVehiculoBaratoActionPerformed
         controlador.getVehiculosMasBarato();
-    }//GEN-LAST:event_botonBaratoActionPerformed
+    }//GEN-LAST:event_botonVehiculoBaratoActionPerformed
 
-    private void botonCaroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCaroActionPerformed
+    private void menuAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAbrirActionPerformed
+        if(selectorFicheros.showOpenDialog(this)==JFileChooser.APPROVE_OPTION){
+            controlador.cargarVehiculo();
+        }
+    }//GEN-LAST:event_menuAbrirActionPerformed
+
+    private void menuGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGuardarActionPerformed
+        if(selectorFicheros.showSaveDialog(this)==JFileChooser.APPROVE_OPTION){
+            try {
+                controlador.guardarVehiculo();
+            } catch (DaoException ex) {
+                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_menuGuardarActionPerformed
+
+    private void menuBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuBuscarActionPerformed
+        String matricula=JOptionPane.showInputDialog(this, "Matricula a buscar");
+        if(matricula!=null){
+            limpiarCampos();
+            mostrarMatricula(matricula);
+            controlador.buscarVehiculo();
+        }
+    }//GEN-LAST:event_menuBuscarActionPerformed
+
+    private void comboFiltroGrupoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboFiltroGrupoActionPerformed
+                   
+    }//GEN-LAST:event_comboFiltroGrupoActionPerformed
+
+    private void botonVehiculoCaroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVehiculoCaroActionPerformed
         controlador.getVehiculosMasCaro();
-    }//GEN-LAST:event_botonCaroActionPerformed
-
-    private void radioBotonMatriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioBotonMatriculaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_radioBotonMatriculaActionPerformed
-
-    private void radioBotonPrecioAlquilerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioBotonPrecioAlquilerActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_radioBotonPrecioAlquilerActionPerformed
+    }//GEN-LAST:event_botonVehiculoCaroActionPerformed
 
     /**
      * @param args the command line arguments
@@ -649,46 +560,141 @@ public class Ventana extends javax.swing.JFrame {
             }
         });
     }
+    
+    public String getMatricula() {
+        return this.textMatricula.getText();
+    }
+    
+    public String getGrupo() {
+        return this.comboGrupo.getSelectedItem().toString();
+    }
+    
+    public String getTipo() {
+        return this.comboTipo.getSelectedItem().toString();
+    }
+    
+    public int getPlazas() {
+        return (Integer) this.spinnerPlazas.getValue();
+    }
+    
+    public float getCapacidad() {
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botonBarato;
-    private javax.swing.JButton botonBorrar;
-    private javax.swing.JButton botonCaro;
-    private javax.swing.JButton botonListar;
-    private javax.swing.JButton botonModificar;
-    private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JComboBox<String> comboBoxFiltrarGrupo;
-    private javax.swing.JComboBox<String> comboBoxFiltrarTipo;
-    private javax.swing.JComboBox<String> comboBoxGrupo;
-    private javax.swing.JComboBox<String> comboBoxTipo;
-    private javax.swing.JFormattedTextField formatedTextFieldPrecioAlquiler;
-    private javax.swing.JFormattedTextField formattedTextFieldCapacidad;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
+        return Float.parseFloat(this.formatedCapacidad.getValue().toString());
+    }
+    
+    public String getArchivo() {
+        return this.selectorFicheros.getSelectedFile().getAbsolutePath();
+    }
+    
+    public String getOrden() {
+        return this.grupoBotonesListado.getSelection().getActionCommand();
+    }
+
+    public String getFiltroGrupo() {
+        return this.comboFiltroGrupo.getSelectedItem().toString();
+    }
+    
+    public String getFiltroTipo() {
+        return this.comboFiltroTipo.getSelectedItem().toString();
+    }
+    
+    public void mostrar() {
+        setVisible(true);
+    }
+
+    public void mostrarMatricula(String matricula) {
+        this.textMatricula.setText(matricula);
+    }
+
+    public void mostrarTipo(String tipo) {
+        this.comboTipo.setSelectedItem(tipo);
+    }
+
+    public void mostrarGrupo(String grupo) {
+        this.comboGrupo.setSelectedItem(grupo);
+    }
+
+    public void mostrarPlazas(int plazas) {
+        this.spinnerPlazas.setValue(plazas);
+    }
+
+    public void mostrarCapacidad(float capacidad) {
+        this.formatedCapacidad.setValue(capacidad);
+    }
+
+    public void mostrarPrecioAlquiler(float precio) {
+        this.formatedPrecio.setText(Float.toString(precio));
+    }
+    
+    public void listarVehiculos(List<Vehiculo> listado) {
+        tableModelTM2.setListado(listado);
+    }
+    
+    public void mostrarMensaje(String mensaje) {
+        JOptionPane.showMessageDialog(this,mensaje);
+    }
+    
+    public boolean solicitarConfirmacion() {
+
+        int opcion = JOptionPane.showConfirmDialog(this, "¿Está seguro que desea continuar?", "Confirmación", JOptionPane.YES_NO_OPTION);
+        return opcion == JOptionPane.YES_OPTION;
+
+    }
+    
+    public void setControlador(Controlador controlador) {
+        this.controlador = controlador;
+    }
+    
+    public void limpiarCampos() {
+        this.textMatricula.setText("");
+        this.spinnerPlazas.setValue(0);
+        this.formatedCapacidad.setText("");
+        this.formatedPrecio.setText("");
+    }
+
+    public final static int SI = 0;
+    private DialogoVehiculo dialogo = new DialogoVehiculo(this, true);
+    private Controlador controlador;
     private VehiculoTableModel vehiculoTM;
-    private javax.swing.JTable jTable1;
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonBorrar;
+    private javax.swing.JRadioButton botonMatricula;
+    private javax.swing.JButton botonModificar;
+    private javax.swing.JRadioButton botonPrecio;
+    private javax.swing.JButton botonVehiculoBarato;
+    private javax.swing.JButton botonVehiculoCaro;
+    private javax.swing.JButton botonVehiculos;
+    private javax.swing.JComboBox<String> comboFiltroGrupo;
+    private javax.swing.JComboBox<String> comboFiltroTipo;
+    private javax.swing.JComboBox<String> comboGrupo;
+    private javax.swing.JComboBox<String> comboTipo;
+    private javax.swing.JPanel datosVehiculos;
+    private javax.swing.JFormattedTextField formatedCapacidad;
+    private javax.swing.JFormattedTextField formatedPrecio;
+    private javax.swing.ButtonGroup grupoBotonesListado;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelCapacidad;
-    private javax.swing.JLabel labelFiltrarPorGrupo;
-    private javax.swing.JLabel labelFiltrarPorTipo;
+    private javax.swing.JLabel labelFiltroGRupo;
+    private javax.swing.JLabel labelFiltroTipo;
     private javax.swing.JLabel labelGrupo;
     private javax.swing.JLabel labelMatricula;
-    private javax.swing.JLabel labelOrden;
+    private javax.swing.JLabel labelOrdenListado;
     private javax.swing.JLabel labelPlazas;
-    private javax.swing.JLabel labelPrecioDia;
+    private javax.swing.JLabel labelPrecio;
     private javax.swing.JLabel labelTipo;
+    private javax.swing.JPanel listadoVehiculos;
     private javax.swing.JMenuItem menuAbrir;
     private javax.swing.JMenu menuArchivo;
     private javax.swing.JMenuItem menuBuscar;
     private javax.swing.JMenuItem menuGuardar;
     private javax.swing.JMenuItem menuNuevo;
     private javax.swing.JMenu menuVehiculo;
-    private javax.swing.JPanel panelDatos;
-    private javax.swing.JRadioButton radioBotonMatricula;
-    private javax.swing.JRadioButton radioBotonPrecioAlquiler;
+    private javax.swing.JMenuBar menus;
+    private javax.swing.JPanel otrasOperaciones;
     private javax.swing.JFileChooser selectorFicheros;
     private javax.swing.JSpinner spinnerPlazas;
-    private javax.swing.JTextField textFieldMatricula;
+    private VehiculoTableModel tableModelTM2;
+    private javax.swing.JTable tablaVehiculos;
+    private javax.swing.JTextField textMatricula;
     // End of variables declaration//GEN-END:variables
 }

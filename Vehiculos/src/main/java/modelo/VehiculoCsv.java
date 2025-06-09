@@ -4,6 +4,8 @@
  */
 package modelo;
 
+import modelo.MatriculaException;
+import modelo.VehiculoDao;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -40,7 +42,7 @@ public class VehiculoCsv implements VehiculoDao{
     public String toString() {
         return path + "";
     }
- 
+          
     @Override
     public List<Vehiculo> listar() throws DaoException {
         List lista = new ArrayList<>();
@@ -76,7 +78,7 @@ public class VehiculoCsv implements VehiculoDao{
         cont = 0;
         try (BufferedWriter fichero = Files.newBufferedWriter(path)){
             for(Vehiculo e:vehiculos){
-            fichero.write(e.getClass().getSimpleName() + "," + e.toString());
+            fichero.write(e.getClass().getSimpleName() + "," + e.toString());            
             fichero.newLine();
             cont++;
             }

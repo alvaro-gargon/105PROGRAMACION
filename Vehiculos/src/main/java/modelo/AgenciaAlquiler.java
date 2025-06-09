@@ -4,7 +4,6 @@
  */
 package modelo;
 
-import modelo.ComparadorPrecio;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -20,6 +19,7 @@ public class AgenciaAlquiler {
  private String nombre;
  private Map<String,Vehiculo> vehiculos;
 
+    
     public AgenciaAlquiler(String nombre) {
         this.nombre = nombre;
         vehiculos=new TreeMap<>();
@@ -80,9 +80,10 @@ public class AgenciaAlquiler {
         ArrayList buscarMenor = new ArrayList<>(vehiculos.values());
         return Collections.min(buscarMenor,new ComparadorPrecio());
     }
+    
     public Vehiculo getVehiculoMasCaro(){
-        ArrayList buscarMayor = new ArrayList<>(vehiculos.values());
-        return Collections.max(buscarMayor, new ComparadorPrecio());
+        ArrayList buscarMenor = new ArrayList<>(vehiculos.values());
+        return Collections.max(buscarMenor,new ComparadorPrecio());
     }
     
     public int guardarVehiculos() throws DaoException{
@@ -97,10 +98,8 @@ public class AgenciaAlquiler {
         if(vehiculoDao==null){
             throw new DaoException("Empleado null");
         }
-        List<Vehiculo> listaVehiculos=vehiculoDao.listar();
-        vehiculos=new TreeMap<>();
-        for(Vehiculo e:listaVehiculos){
-            vehiculos.putIfAbsent(e.getMatricula(), e);
+        for (Vehiculo v : vehiculoDao.listar()) {
+            vehiculos.putIfAbsent(v.getMatricula(), v);
         }
         return vehiculos.size();
     }

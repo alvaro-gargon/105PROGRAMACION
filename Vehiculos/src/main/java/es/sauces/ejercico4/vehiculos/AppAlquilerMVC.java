@@ -5,26 +5,25 @@
 package es.sauces.ejercico4.vehiculos;
 
 import controlador.Controlador;
+import java.util.logging.Logger;
 import modelo.AgenciaAlquiler;
 import vista.Ventana;
 
 /**
  *
- * @author alvaro.gargon.4
+ * @author marcos.fergar
  */
 public class AppAlquilerMVC {
-
+private static final Logger LOG = Logger.getLogger("es.sauces.Agenda");
+    
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args){
+        AgenciaAlquiler modelo=new AgenciaAlquiler("Alquiler de Vehiculos");
         Ventana vista=new Ventana();
-        AgenciaAlquiler agenciaAlquiler=new AgenciaAlquiler("Alquiler de vehiculos");
-        Controlador controlador= new Controlador(vista,agenciaAlquiler);
+        Controlador controlador=new Controlador(vista,modelo);
         vista.setControlador(controlador);
         controlador.iniciar();
-        
-        
     }
-    
 }

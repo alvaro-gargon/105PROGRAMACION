@@ -6,48 +6,10 @@ package vista;
 
 /**
  *
- * @author alvaro.gargon.4
+ * @author marcos.fergar
  */
 public class DialogoVehiculo extends javax.swing.JDialog {
-    
-    private int opcion;
-    public static final int ACEPTAR=1;
-    public static final int CANCELAR=0;
-    
-    public String getMatricula(){
-       return this.textFieldMatricula.getText();
-    }
-    
-    public String getGrupo(){
-        return this.comboBoxGrupo.getSelectedItem().toString();
-    }
-    
-    public int getPlazas(){
-        return (Integer)this.spinnerPlazas.getValue();
-    }
-    
-    public String getTipo(){
-        return  this.comboBoxTipo.getSelectedItem().toString();
-    }
-    
-    public float getCapacidad(){
-        return Float.parseFloat(this.formattedTextFieldCapacidad.getValue().toString());
-    }
-    
-    public void limpiarCampos(){
-        this.textFieldMatricula.setText("");
-        this.comboBoxGrupo.setSelectedItem(0);
-        this.comboBoxTipo.setSelectedItem(0);
-        this.spinnerPlazas.setValue(0);
-        this.formattedTextFieldCapacidad.setValue("");
-    }
-    
-    public int mostrar(){
-        opcion=CANCELAR;
-        this.setVisible(true);
-        return opcion;
-    }
-    
+
     /**
      * Creates new form DialogoVehiculo
      */
@@ -55,7 +17,41 @@ public class DialogoVehiculo extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
     }
-
+    
+    public String getMatricula(){
+        return this.textMATRICULA.getText();
+    }
+    
+    public String getGrupo(){
+        return (String) this.comboGrupo.getSelectedItem();
+    }
+    
+    public int getPlazas(){
+        return (Integer)this.spinnerPlazas.getValue();
+    }
+    
+    public String getTipo(){
+        return (String) this.comboTipo.getSelectedItem();
+    }
+    public float getCapacidad(){
+        return Float.parseFloat(this.formatedCapacidad.getValue().toString());
+    }    
+    
+    public int mostrar(){
+        opcion=CANCELAR;
+        this.setVisible(true);
+        return opcion;
+    }
+    
+    public void limpiarCampos() {
+        this.textMATRICULA.setText("");
+        this.spinnerPlazas.setValue(0);
+        this.formatedCapacidad.setText("");
+    }
+    
+    private int opcion;    
+    public static final int ACEPTAR=1;
+    public static final int CANCELAR=0;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -65,47 +61,31 @@ public class DialogoVehiculo extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelDatos = new javax.swing.JPanel();
+        datosVehiculo = new javax.swing.JPanel();
         labelMatricula = new javax.swing.JLabel();
-        textFieldMatricula = new javax.swing.JTextField();
         labelGrupo = new javax.swing.JLabel();
-        comboBoxGrupo = new javax.swing.JComboBox<>();
-        labelTipo = new javax.swing.JLabel();
-        comboBoxTipo = new javax.swing.JComboBox<>();
         labelPlazas = new javax.swing.JLabel();
-        spinnerPlazas = new javax.swing.JSpinner();
+        labelTurismo = new javax.swing.JLabel();
         botonAceptar = new javax.swing.JButton();
         botonCancelar = new javax.swing.JButton();
+        comboGrupo = new javax.swing.JComboBox<>();
+        comboTipo = new javax.swing.JComboBox<>();
+        textMATRICULA = new javax.swing.JTextField();
+        spinnerPlazas = new javax.swing.JSpinner();
         labelCapacidad = new javax.swing.JLabel();
-        formattedTextFieldCapacidad = new javax.swing.JFormattedTextField();
+        formatedCapacidad = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        panelDatos.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 255, 255)), "Datos de vehiculo"));
+        datosVehiculo.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos de vehiculo"));
 
-        labelMatricula.setText("MATRÍCULA");
+        labelMatricula.setText("MATRICULA");
 
         labelGrupo.setText("GRUPO");
 
-        comboBoxGrupo.setEditable(true);
-        comboBoxGrupo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "B", "C" }));
-        comboBoxGrupo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboBoxGrupoActionPerformed(evt);
-            }
-        });
-
-        labelTipo.setText("Tipo");
-
-        comboBoxTipo.setEditable(true);
-        comboBoxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TURISMO", "FURGONETA" }));
-        comboBoxTipo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboBoxTipoActionPerformed(evt);
-            }
-        });
-
         labelPlazas.setText("PLAZAS");
+
+        labelTurismo.setText("TIPO");
 
         botonAceptar.setText("ACEPTAR");
         botonAceptar.addActionListener(new java.awt.event.ActionListener() {
@@ -115,73 +95,99 @@ public class DialogoVehiculo extends javax.swing.JDialog {
         });
 
         botonCancelar.setText("CANCELAR");
+        botonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCancelarActionPerformed(evt);
+            }
+        });
 
-        labelCapacidad.setText("CAPACIDAD");
+        comboGrupo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "B", "C" }));
 
-        formattedTextFieldCapacidad.setValue(0.0f);
-        formattedTextFieldCapacidad.setVisible(false);
+        comboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Turismo", "Furgoneta" }));
+        comboTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboTipoActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout panelDatosLayout = new javax.swing.GroupLayout(panelDatos);
-        panelDatos.setLayout(panelDatosLayout);
-        panelDatosLayout.setHorizontalGroup(
-            panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelDatosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelDatosLayout.createSequentialGroup()
-                        .addComponent(labelMatricula)
-                        .addGap(48, 48, 48)
-                        .addComponent(textFieldMatricula))
-                    .addGroup(panelDatosLayout.createSequentialGroup()
-                        .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelDatosLayout.createSequentialGroup()
-                                .addComponent(labelPlazas)
-                                .addGap(18, 18, 18)
-                                .addComponent(spinnerPlazas, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelDatosLayout.createSequentialGroup()
-                                .addComponent(labelGrupo)
-                                .addGap(18, 18, 18)
-                                .addComponent(comboBoxGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(labelTipo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(comboBoxTipo, 0, 107, Short.MAX_VALUE))
-                    .addGroup(panelDatosLayout.createSequentialGroup()
+        labelCapacidad.setVisible(false);
+        labelCapacidad.setText("Capacidad");
+
+        formatedCapacidad.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        formatedCapacidad.setValue(0.0f);
+        formatedCapacidad.setVisible(false);
+        formatedCapacidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                formatedCapacidadActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout datosVehiculoLayout = new javax.swing.GroupLayout(datosVehiculo);
+        datosVehiculo.setLayout(datosVehiculoLayout);
+        datosVehiculoLayout.setHorizontalGroup(
+            datosVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(datosVehiculoLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(datosVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(datosVehiculoLayout.createSequentialGroup()
                         .addComponent(botonAceptar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(botonCancelar))
-                    .addGroup(panelDatosLayout.createSequentialGroup()
-                        .addComponent(labelCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(39, 39, 39)
-                        .addComponent(formattedTextFieldCapacidad)))
-                .addContainerGap())
+                        .addComponent(botonCancelar)
+                        .addGap(35, 35, 35))
+                    .addGroup(datosVehiculoLayout.createSequentialGroup()
+                        .addGroup(datosVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(datosVehiculoLayout.createSequentialGroup()
+                                .addComponent(labelMatricula)
+                                .addGap(18, 18, 18)
+                                .addComponent(textMATRICULA, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(datosVehiculoLayout.createSequentialGroup()
+                                .addGroup(datosVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(datosVehiculoLayout.createSequentialGroup()
+                                        .addComponent(labelGrupo)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(comboGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(datosVehiculoLayout.createSequentialGroup()
+                                        .addComponent(labelPlazas)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(spinnerPlazas, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(36, 36, 36)
+                                .addGroup(datosVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(datosVehiculoLayout.createSequentialGroup()
+                                        .addComponent(labelCapacidad)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(formatedCapacidad))
+                                    .addGroup(datosVehiculoLayout.createSequentialGroup()
+                                        .addComponent(labelTurismo)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addContainerGap(78, Short.MAX_VALUE))))
         );
-        panelDatosLayout.setVerticalGroup(
-            panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelDatosLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        datosVehiculoLayout.setVerticalGroup(
+            datosVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(datosVehiculoLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(datosVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelMatricula)
-                    .addComponent(textFieldMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(textMATRICULA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
+                .addGroup(datosVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelGrupo)
-                    .addComponent(comboBoxGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelTipo)
-                    .addComponent(comboBoxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelPlazas)
-                    .addComponent(spinnerPlazas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelCapacidad)
-                    .addComponent(formattedTextFieldCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelTurismo)
+                    .addComponent(comboGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23)
+                .addGroup(datosVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(datosVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(labelCapacidad)
+                        .addComponent(formatedCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(datosVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(labelPlazas)
+                        .addComponent(spinnerPlazas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
+                .addGroup(datosVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonAceptar)
                     .addComponent(botonCancelar))
-                .addGap(162, 162, 162))
+                .addGap(26, 26, 26))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -189,24 +195,19 @@ public class DialogoVehiculo extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(61, 61, 61)
-                .addComponent(panelDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addComponent(datosVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 12, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(panelDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(182, Short.MAX_VALUE))
+                .addComponent(datosVehiculo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void comboBoxGrupoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxGrupoActionPerformed
-        
-    }//GEN-LAST:event_comboBoxGrupoActionPerformed
 
     private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
         if(!botonAceptar.getText().isBlank()){
@@ -215,19 +216,27 @@ public class DialogoVehiculo extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_botonAceptarActionPerformed
 
-    private void comboBoxTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxTipoActionPerformed
-        if(this.comboBoxTipo.getSelectedItem()=="TURISMO"){
+    private void formatedCapacidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_formatedCapacidadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formatedCapacidadActionPerformed
+
+    private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
+        setVisible(false);
+    }//GEN-LAST:event_botonCancelarActionPerformed
+
+    private void comboTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTipoActionPerformed
+        if(this.comboTipo.getSelectedItem()=="Turismo"){
             this.labelPlazas.setVisible(true);
             this.spinnerPlazas.setVisible(true);
             this.labelCapacidad.setVisible(false);
-            this.formattedTextFieldCapacidad.setVisible(false);
+            this.formatedCapacidad.setVisible(false);
         }else {
             this.labelPlazas.setVisible(false);
             this.spinnerPlazas.setVisible(false);
             this.labelCapacidad.setVisible(true);
-            this.formattedTextFieldCapacidad.setVisible(true);
+            this.formatedCapacidad.setVisible(true);
         }
-    }//GEN-LAST:event_comboBoxTipoActionPerformed
+    }//GEN-LAST:event_comboTipoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -270,20 +279,20 @@ public class DialogoVehiculo extends javax.swing.JDialog {
             }
         });
     }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonAceptar;
     private javax.swing.JButton botonCancelar;
-    private javax.swing.JComboBox<String> comboBoxGrupo;
-    private javax.swing.JComboBox<String> comboBoxTipo;
-    private javax.swing.JFormattedTextField formattedTextFieldCapacidad;
+    private javax.swing.JComboBox<String> comboGrupo;
+    private javax.swing.JComboBox<String> comboTipo;
+    private javax.swing.JPanel datosVehiculo;
+    private javax.swing.JFormattedTextField formatedCapacidad;
     private javax.swing.JLabel labelCapacidad;
     private javax.swing.JLabel labelGrupo;
     private javax.swing.JLabel labelMatricula;
     private javax.swing.JLabel labelPlazas;
-    private javax.swing.JLabel labelTipo;
-    private javax.swing.JPanel panelDatos;
+    private javax.swing.JLabel labelTurismo;
     private javax.swing.JSpinner spinnerPlazas;
-    private javax.swing.JTextField textFieldMatricula;
+    private javax.swing.JTextField textMATRICULA;
     // End of variables declaration//GEN-END:variables
 }

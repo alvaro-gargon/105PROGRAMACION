@@ -4,9 +4,6 @@
  */
 package modelo;
 
-import modelo.VehiculoDao;
-import modelo.Vehiculo;
-import modelo.DaoException;
 import java.io.EOFException;
 import java.io.FileNotFoundException;
 import java.io.IOException;

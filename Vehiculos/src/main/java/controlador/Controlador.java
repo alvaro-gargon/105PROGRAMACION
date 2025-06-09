@@ -6,8 +6,11 @@ package controlador;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.InputMismatchException;
 import java.util.List;
+import java.util.Locale;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -20,93 +23,102 @@ import modelo.MatriculaException;
 import modelo.Turismo;
 import modelo.Vehiculo;
 import modelo.VehiculoCsv;
+import modelo.VehiculoDao;
+import modelo.VehiculoJson;
+import modelo.VehiculoObj;
+import modelo.VehiculoXml;
 import vista.Ventana;
 
 /**
  *
- * @author alvaro.gargon.4
+ * @author marcos.fergar
  */
 public class Controlador {
+
     private static final Logger LOG = Logger.getLogger(Controlador.class.getName());
-    
+
+    Scanner teclado = new Scanner(System.in);
+
     private Ventana vista;
-    private AgenciaAlquiler agenciaAlquiler;
-    
-    public Controlador(Ventana vista, AgenciaAlquiler agenciaAlquiler) {
+    private AgenciaAlquiler modelo;
+
+    public Controlador(Ventana vista, AgenciaAlquiler modelo) {
         this.vista = vista;
-        this.agenciaAlquiler=agenciaAlquiler;
+        this.modelo = modelo;
     }
-    
+
     public void iniciar() {
         vista.mostrar();
     }
-     
+
     public void crearVehiculo() throws MatriculaException {
         String matricula = vista.getMatricula();
-        Grupo grupo = Grupo.valueOf(vista.getGrupo().toUpperCase());
         String tipo = vista.getTipo();
-        float capacidad = vista.getCapacidad();
         int plazas = vista.getPlazas();
-         try {
+        float capacidad = vista.getCapacidad();
+
+        Grupo grupo = Grupo.valueOf(vista.getGrupo().toUpperCase());
+
+        try {
             Vehiculo vehiculo = switch (tipo) {
-            case "TURISMO" ->
-                new Turismo(matricula, grupo, plazas);
-            case "FURGONETA" ->
-                new Furgoneta(matricula, grupo, capacidad);
-            default ->
-                null;
-        };
-       
-            if (vehiculo!=null && agenciaAlquiler.incluirVehiculo(vehiculo)) {
-                vista.mostrarMensaje(vista.getTipo());
+                case "Turismo" ->
+                    new Turismo(matricula, grupo, plazas);
+                case "Furgoneta" ->
+                    new Furgoneta(matricula, grupo, capacidad);
+                default ->
+                    null;
+            };
+
+            if (vehiculo != null && modelo.incluirVehiculo(vehiculo)) {
                 vista.mostrarMensaje("Vehiculo creado con exito");
                 vista.mostrarPrecioAlquiler(vehiculo.getPrecioAlquiler());
-                vista.listarVehiculos(agenciaAlquiler.listarVehiculoPorPrecio());
+                vista.listarVehiculos(modelo.listarVehiculoPorPrecio());
             } else {
                 vista.mostrarMensaje("Error al crear un vehiculo");
             }
-        } catch (IllegalArgumentException | InputMismatchException ex) {
+        } catch (MatriculaException | IllegalArgumentException | InputMismatchException ex) {
             LOG.log(Level.SEVERE, "Error " + ex.getMessage());
             vista.mostrarMensaje(ex.getMessage());
-        } 
-    }
-    
-    public void buscarVehiculo() {
-        String matricula = vista.getMatricula();
-        Vehiculo vehiculo = agenciaAlquiler.consultarVehiculo(matricula);
-        if (vehiculo != null) {
-            vista.mostrarMatricula(vehiculo.getMatricula());
-            vista.mostrarGrupo(vehiculo.getGrupo().toString());
-            vista.mostrarTipo(vehiculo instanceof Turismo  ? "TURISMO":"FURGONETA");
-            if(vehiculo instanceof Turismo){
-                    vista.mostrarPlazas(((Turismo) vehiculo).getPlazas());
-                }else{
-                    vista.mostrarCapacidad(((Furgoneta) vehiculo).getCapacidad());
-                }
-            vista.mostrarPrecioAlquiler(vehiculo.getPrecioAlquiler());
-        } else {
-            vista.mostrarMensaje("No existe un Empleado con ese nombre");
         }
     }
- 
-    
-    public void eliminarVehiculo(){
-        if (vista.solicitarConfiramcion()) {
-            if (agenciaAlquiler.eliminarVehiculo(agenciaAlquiler.consultarVehiculo(vista.getMatricula()))) {
+
+    public void buscarVehiculo() {
+        String matricula = vista.getMatricula();
+        String tipo = vista.getTipo();
+        String grupo = vista.getGrupo();
+        Vehiculo vehiculo = (Vehiculo) modelo.getVehiculos();
+        if (vehiculo != null) {
+            vista.mostrarMatricula(matricula);
+            vista.mostrarTipo(tipo);
+            vista.mostrarGrupo(grupo);
+            if (vehiculo instanceof Turismo) {
+                vista.mostrarPlazas(((Turismo) vehiculo).getPlazas());
+            } else {
+                vista.mostrarCapacidad(((Furgoneta) vehiculo).getCapacidad());
+            }
+            vista.mostrarPrecioAlquiler(vehiculo.getPrecioAlquiler());
+        } else {
+            vista.mostrarMensaje("No existe un Vehiculo con ese nombre");
+        }
+    }
+
+    public void eliminarVehiculo() {
+        if (vista.solicitarConfirmacion()) {
+            if (modelo.eliminarVehiculo(modelo.consultarVehiculo(vista.getMatricula()))) {
                 vista.mostrarMensaje("Vehiculo eliminado");
                 vista.limpiarCampos();
-                vista.listarVehiculos(agenciaAlquiler.listarVehiculoPorPrecio());
+                vista.listarVehiculos(modelo.listarVehiculo(Grupo.valueOf(vista.getGrupo())));
             } else {
                 vista.mostrarMensaje("No se ha podido eliminar el vehiculo");
             }
         }
     }
-    
+
     public void modificarVehiculo() {
         Vehiculo vehiculo;
         String matricula = vista.getMatricula();
         try {
-            vehiculo = agenciaAlquiler.consultarVehiculo(matricula);
+            vehiculo = modelo.consultarVehiculo(matricula);
             if (vehiculo != null) {
                 vehiculo.setMatricula(vista.getMatricula());
                 if (vehiculo instanceof Turismo) {
@@ -115,7 +127,7 @@ public class Controlador {
                     ((Furgoneta) vehiculo).setCapacidad(vista.getCapacidad());
                 }
                 vista.mostrarPrecioAlquiler(vehiculo.getPrecioAlquiler());
-                vista.listarVehiculos(agenciaAlquiler.listarVehiculoPorPrecio());
+                vista.listarVehiculos(modelo.listarVehiculo(Grupo.valueOf(vista.getGrupo())));
             } else {
                 vista.mostrarMensaje("No se ha podido modificar el contacto");
             }
@@ -123,56 +135,43 @@ public class Controlador {
             vista.mostrarMensaje(ex.toString());
         }
     }
-    
-    public void guardarVehiculo() {
-        String nombreArchivo = vista.getArchivo();
-        agenciaAlquiler.setVehiculoDao(new VehiculoCsv(nombreArchivo));
-        try {
-            System.out.println(agenciaAlquiler.guardarVehiculos());
 
-        } catch (DaoException ex) {
-            System.out.println(ex.toString());
-        }
+    public void guardarVehiculo() throws DaoException {
+        String nombreArchivo = vista.getArchivo();
+        modelo.setVehiculoDao(new VehiculoCsv(nombreArchivo));
+        System.out.println(modelo.guardarVehiculos());
     }
-    
-     public void cargarVehiculo() {
-        String nombreArchivo=vista.getArchivo();
-        agenciaAlquiler.setVehiculoDao(new VehiculoCsv(nombreArchivo));
+
+    public void cargarVehiculo() {
+        String nombreArchivo = vista.getArchivo();
+        modelo.setVehiculoDao(new VehiculoCsv(nombreArchivo));
         try {
-            agenciaAlquiler.cargarVehiculos();
-            vista.listarVehiculos(agenciaAlquiler.listarVehiculoPorPrecio());
+            modelo.cargarVehiculos();
+            vista.listarVehiculos(modelo.listarVehiculo(Grupo.valueOf(vista.getGrupo())));
         } catch (DaoException ex) {
             vista.mostrarMensaje(ex.getMessage());
         }
     }
-    
+
     public void listarVehiculo() {
         List<Vehiculo> listado = null;
- 
+
         switch (vista.getOrden()) {
             case "MATRICULA" ->
-                listado = agenciaAlquiler.listarVehiculo(Grupo.valueOf(vista.getGrupo()));
-            case "PRECIO ALQUILER" -> {
-                listado = agenciaAlquiler.listarVehiculoPorPrecio();
-                /*listado.sort(new Comparator<Vehiculo>() {
-                    @Override
-                    public int compare(Vehiculo v1, Vehiculo v2) {
-                        return Float.compare(v1.getPrecioAlquiler(), v2.getPrecioAlquiler());
-                    }
-                });
-                */
-            }
+                listado = modelo.listarVehiculo(Grupo.valueOf(vista.getGrupo()));
+            case "PRECIO ALQUILER" ->
+                listado = modelo.listarVehiculoPorPrecio().reversed();
         }
         switch (vista.getFiltroGrupo()) {
             case "TODOS" ->
-                listado = agenciaAlquiler.listarVehiculoPorPrecio();
+                listado = modelo.listarVehiculoPorPrecio();
             case "A" -> {
-                listado = agenciaAlquiler.listarVehiculo(Grupo.A);
+                listado = modelo.listarVehiculo(Grupo.A);
             }
             case "B" ->
-                listado = agenciaAlquiler.listarVehiculo(Grupo.B);
+                listado = modelo.listarVehiculo(Grupo.B);
             case "C" ->
-                listado = agenciaAlquiler.listarVehiculo(Grupo.C);
+                listado = modelo.listarVehiculo(Grupo.C);
         }
         switch (vista.getFiltroTipo()) {
             case "TURISMO" -> {
@@ -182,22 +181,45 @@ public class Controlador {
                 listado = listado.stream().filter(v -> v instanceof Furgoneta).collect(Collectors.toList());
             }
         }
+
         vista.mostrarMensaje(vista.getFiltroTipo());
         vista.mostrarMensaje(vista.getFiltroGrupo());
         vista.listarVehiculos(listado);
     }
+
     public void getVehiculosMasBarato(){
-        Vehiculo vehiculo = agenciaAlquiler.getVehiculoMasBarato();
+        Vehiculo vehiculo = modelo.getVehiculoMasBarato();
         List<Vehiculo> listado = new ArrayList<>();
         listado.add(vehiculo);  
         vista.listarVehiculos(listado);
-
+ 
     }
     public void  getVehiculosMasCaro(){
-        Vehiculo vehiculo = agenciaAlquiler.getVehiculoMasCaro();
+        Vehiculo vehiculo = modelo.getVehiculoMasCaro();
         List<Vehiculo> listado = new ArrayList<>();
         listado.add(vehiculo);  
         vista.listarVehiculos(listado);
     }
-    
+
+    private static VehiculoDao getDao(String nombreArchivo) {
+        VehiculoDao vehiculoDao = null;
+        String extension = null;
+        int indice = nombreArchivo.lastIndexOf(".");
+        extension = nombreArchivo.substring(indice);
+        //lastindexof(.)
+        vehiculoDao = switch (extension) {
+            case ".csv" ->
+                new VehiculoCsv(nombreArchivo);
+            case ".obj" ->
+                new VehiculoObj(nombreArchivo);
+            case ".gson" ->
+                new VehiculoJson(nombreArchivo);
+            case ".xml" ->
+                new VehiculoXml(nombreArchivo) {
+                };
+            default ->
+                null;
+        };
+        return vehiculoDao;
+    }
 }
